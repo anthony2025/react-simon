@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Build a Simon Game</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<div class="circle">
+
+  <button class="trapezoid green"></button>
+  <button class="trapezoid red"></button>
+  <button class="trapezoid blue"></button>
+  <button class="trapezoid yellow"></button>
+
+  <div class="center">
+    <div class="title">Simon<sup>&#174</sup></div>
+    <div class="count">
+      <p class="screen"></p>
+      <p class="tag">COUNT</p>
+    </div>
+    <button class="start">
+      <p class="tag">START</p>
+    </button>
+    <input type="checkbox" class="strict"/>
+    <p class="tag strict-tag">STRICT</p>
+    <div class="strict-light"></div>
+  </div>
+</div>
+
+  <script src="js/jquery.js"></script>
+  <script src="js/lodash.js"></script>
+  <script src="js/tinycolor.js"></script>
+  <script src="js/index.js"></script>
+</body>
+</html>
