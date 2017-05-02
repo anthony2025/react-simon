@@ -1,7 +1,12 @@
 import React from 'react'
 import {render} from 'react-dom'
-import App from 'components/App.js'
-import 'styles/index.css'
+import './global.css'
+
+import Simon from './Simon'
+
+const App = () => (
+  <Simon />
+)
 
 render(
   <App />,

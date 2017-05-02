@@ -1,40 +1,40 @@
-Node rest API boilerplate with upcoming GraphQL support. Meant as a boilerplate for future projects.
-Live at https://mern-boilerplate-server.herokuapp.com/
+A responsive website made for Rose's Daycare LLC powered by React and CSS Modules.
 
-### TODO
-* GraphQL
-* CORS support
+## Live at
+[roses-daycare.firebaseapp.com](https://roses-daycare.firebaseapp.com)
 
-### Example usage
-* https://mern-boilerplate-server.herokuapp.com/api/tasks/
-* https://mern-boilerplate-server.herokuapp.com/api/tasks/:taskId
+## Technologies
+  * [React] and [react-router]
+  * [CSS Modules][css-modules] and [PostCSS-cssnext][css-next]
+  * Layout purely in Flexbox
+  * Webpack config powered by [nwb]
+  * [Firebase] for a serverless database and hosting
 
-### Example output
-{
-  "_id": "580ee8dfe4360c5c6c8c4400",
-  "title": "do",
-  "status": true
-}
+![Screenshot](/assets/screenshot.png?raw=true)
 
-### Acknowledgments
-* **Sandro Sanchez** - *fork and guidance* - [sandropucp](https://github.com/sandropucp)
+## Prerequisites
+[Node] >= 6.x.x must be installed.
+<br />
+[Yarn] >= 0.20.x must be installed.
 
-### Team Members
-<table>
-  <tbody>
-    <tr>
-      <td align="center">
-        <img width="150 height="150"
-        src="https://avatars.githubusercontent.com/anthony2025?v=3">
-        <br />
-        <a href="https://github.com/anthony2025">Anthony Ascencio</a>
-      </td>
-      <td align="center">
-        <img width="150 height="150"
-        src="https://avatars.githubusercontent.com/cesarascencioo?v=3">
-        <br />
-        <a href="https://github.com/cesarascencioo">Cesar Ascencio</a>
-      </td>
-    <tr>
-  <tbody>
-</table>
+## Development
+- `$ yarn install` in the app's root directory will install everything needed for development.
+- `$ yarn start` will run the app's development server at <http://localhost:3000> with hot module reloading.
+
+## Production
+- `$ yarn build` creates a production build by default.
+   To create a development build, set the `NODE_ENV` environment variable to `development` while running this command.
+- `$ yarn run clean` will delete built resources.
+
+## To Do
+  * Replace react-modal with a custom-made modal following [react-modal-dialog] ideas
+
+[react-modal-dialog]: https://github.com/qimingweng/react-modal-dialog
+[react]: https://github.com/facebook/react
+[react-router]: https://github.com/ReactTraining/react-router
+[nwb]: https://github.com/insin/nwb
+[firebase]: https://firebase.google.com/docs/reference/rest/database/
+[css-modules]: https://github.com/css-modules/css-modules
+[css-next]: http://cssnext.io/
+[node]: http://nodejs.org/
+[yarn]: http://yarnpkg.com/

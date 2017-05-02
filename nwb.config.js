@@ -2,14 +2,9 @@ const path = require('path')
 
 module.exports = {
   type: 'react-app',
-  babel: {
-    plugins: ['react-html-attrs'],
-    stage: 0
-  },
   webpack: {
     aliases: {
-      components: path.resolve('src/components'),
-      styles: path.resolve('src/styles')
+      src: path.resolve('src')
     },
     html: {
       mountId: 'root',
@@ -22,7 +17,15 @@ module.exports = {
       },
       postcss: {
         plugins: [
+          require('postcss-modules-values'),
           require('postcss-cssnext')
+        ]
+      }
+    },
+    extra: {
+      resolve: {
+        plugins: [
+          new (require('directory-named-webpack-plugin'))()
         ]
       }
     }

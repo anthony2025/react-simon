@@ -1,0 +1,12 @@
+@value bg-color: #222;
+@value border-color: #333;
+@value light-color: #ECE7EE;
+@value screen-color: #32050C;
+@value green: #00A74A;
+@value red: #9F0F17;
+@value blue: #094A8F;
+@value yellow: #CCA707;
+
+@value font1: url(https://fonts.googleapis.com/css?family=Alfa+Slab+One);
+@value font2: url(https://fonts.googleapis.com/css?family=VT323);
+@value font3: url(https://fonts.googleapis.com/css?family=Oswald);
