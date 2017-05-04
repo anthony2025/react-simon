@@ -1,11 +1,15 @@
 import React, {Component} from 'react'
-import styles from './Simon'
+import styles from './Simon.css';
 
-export default class Simon extends Component {
-  render () {
-    return (
-      <div className={styles.simon}>
-      </div>
-    )
-  }
+import Button from 'src/Button'
+
+export default function Simon (props) {
+  return (
+    <div className={styles.simon}>
+      <Button id='green' />
+      <Button id='red' />
+      <Button id='yellow' />
+      <Button id='blue' />
+    </div>
+  )
 }

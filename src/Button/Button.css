@@ -1,0 +1,31 @@
+:root {
+  --green: #00A74A;
+  --red: #9F0F17;
+  --blue: #094A8F;
+  --yellow: #CCA707;
+}
+
+.button {
+}
+
+.green {
+  composes: button;
+  background-color: var(--green);
+  grid-area: "green";
+}
+.red {
+  composes: button;
+  background-color: var(--red);
+  grid-area: "red";
+}
+.blue {
+  composes: button;
+  background-color: var(--blue);
+  grid-area: "blue";
+}
+.yellow {
+  composes: button;
+  background-color: var(--yellow);
+  grid-area: "yellow";
+}
+

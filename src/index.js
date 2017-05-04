@@ -1,14 +1,10 @@
 import React from 'react'
 import {render} from 'react-dom'
-import './global.css'
+import './index.css'
 
-import Simon from './Simon'
-
-const App = () => (
-  <Simon />
-)
+import Simon from 'src/Simon'
 
 render(
-  <App />,
+  <Simon />,
   document.querySelector('#root')
 )

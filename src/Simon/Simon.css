@@ -1,5 +1,17 @@
 .simon {
-  height: 200px;
-  width: 200px;
-  background-color: blue;
+  height: 90vmin;
+  width: 90vmin;
+  background-color: #333;
+  box-shadow: 0 0 5px #333;
+  border: 30px solid #333;
+  border-radius: 50%;
+  overflow: hidden;
+
+  position: relative;
+  display: grid;
+  grid-gap: 30px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "green red"
+                        "yellow blue";
 }
