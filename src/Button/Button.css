@@ -5,27 +5,23 @@
   --yellow: #CCA707;
 }
 
-.button {
+.green {
+  background-color: var(--green);
+  grid-area: green;
 }
 
-.green {
-  composes: button;
-  background-color: var(--green);
-  grid-area: "green";
-}
 .red {
-  composes: button;
   background-color: var(--red);
-  grid-area: "red";
+  grid-area: red;
 }
+
 .blue {
-  composes: button;
   background-color: var(--blue);
-  grid-area: "blue";
+  grid-area: blue;
 }
+
 .yellow {
-  composes: button;
   background-color: var(--yellow);
-  grid-area: "yellow";
+  grid-area: yellow;
 }
 

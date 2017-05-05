@@ -4,7 +4,7 @@ module.exports = {
   type: 'react-app',
   webpack: {
     aliases: {
-      src: path.resolve('src'),
+      src: path.resolve('src')
     },
     html: {
       mountId: 'root',

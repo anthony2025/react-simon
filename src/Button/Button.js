@@ -4,30 +4,29 @@ import styles from './Button.css'
 
 export default class Button extends Component {
   static propTypes = {
-    id: PropTypes.string.isRequired
+    id: PropTypes.string.isRequired,
+    animate: PropTypes.func
   }
 
-  buttonClass = styles[this.props.id]
+  keyframes = [
+    {filter: 'brightness(1)'},
+    {filter: 'brightness(2.5)'},
+  ]
 
-  animation = {
-    keyframes: [
-      {filter: 'brightness(1)'},
-      {filter: 'brightness(2)'},
-    ],
-    options: {
-      duration: 1000,
-      easing: 'linear'
-    }
+  options = {
+    duration: 1000,
+    easing: 'cubic-bezier(0.1, 0.7, 1.0, 0.1)'
   }
 
-  handleClick = (event) => {
-    const element = event.target
-    element.animate(this.animation.keyframes, this.animation.options);
-  }
+  triggerAnimation = () => this.button.animate(this.keyframes, this.options)
+  exposeAnimation = () => this.triggerAnimation
 
   render() {
     return (
-      <button className={this.buttonClass} onClick={this.handleClick} />
+      <button
+        className={styles[this.props.id]}
+        ref={button => this.button = button}
+        onClick={this.triggerAnimation} />
     )
   }
 }
