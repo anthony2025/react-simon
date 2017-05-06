@@ -18,35 +18,36 @@ export default class Simon extends Component {
     currentLevel: 1
   })
 
-  incrementLevel = (state) => ({
+  state = this.resetGame()
+
+  wonLevel = () => ({
+    buttonPresses: [],
     currentLevel: state.currentLevel + 1
   })
 
+  lostLevel = () => ({
+    buttonPresses: []
+  })
+
   pushButtonPress = (color) => (state) => ({
-    buttonPresses: state.buttonPresses.push(color)
+    buttonPresses: [...state.buttonPresses, color]
   })
 
   hasGameEnded = () => this.state.currentLevel >= this.MAX_LEVEL
-  hasLevelEnded = () => this.state.buttonPresses.length < this.state.currentLevel
+  hasLevelEnded = () => this.state.buttonPresses.length === this.state.currentLevel
+  isPlayerCorrect = () => arrayIncludes(this.state.buttonPresses, this.state.sequence)
 
   checkGameState = () => {
-      if (hasGameEnded()) return this.resetGame
-      if (buttonPresses.length < currentLevel) {
-        return console.log('keep playing')
+      if (hasGameEnded()) {
+        return this.setState(this.resetGame)
       }
-      if (buttonPresses.length === currentLevel) {
-        if (arrayIncludes(buttonPresses, sequence)) {
-          this.setState(this.incrementLevel)
-          this.setState(this.resetGame)
-        }
-        this.resetGame()
-      }
-      if (buttonPresses.length > currentLevel) {
-        return this.resetGame()
+      if (hasLevelEnded()) {
+        isPlayerCorrect()
+          ? this.setState(this.wonLevel)
+          : this.setState(this.lostLevel)
       }
     }
 
-  state = this.resetGame()
   componentDidUpdate = () => null
   componentDidMount = () => null
 
@@ -58,26 +59,14 @@ export default class Simon extends Component {
     const {sequence, level} = this.state
     return (
       <div className={styles.simon}>
-        <Button
-          className='green'
-          observable={getObservable(sequence, level, 1000)}
-          onClick={this.handleClick}
-        />
-        <Button
-          className='red'
-          observable={getObservable(sequence, level, 1000)}
-          onClick={this.handleClick}
-        />
-        <Button
-          className='blue'
-          observable={getObservable(sequence, level, 1000)}
-          onClick={this.handleClick}
-        />
-        <Button
-          className='yellow'
-          observable={getObservable(sequence, level, 1000)}
-          onClick={this.handleClick}
-        />
+        {this.COLORS.map((color) => (
+          <Button
+            key={color}
+            color={color}
+            observable={getObservable(sequence, level, 1000)}
+            onClick={this.handleClick}
+          />
+        ))}
       </div>
     )
   }

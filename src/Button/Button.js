@@ -6,7 +6,7 @@ import {lightenAnimation as animation} from 'src/utils'
 
 export default class Button extends Component {
   static propTypes = {
-    className: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired,
     observable: PropTypes.object.isRequired,
     onClick: PropTypes.func.isRequired,
   }
@@ -16,24 +16,24 @@ export default class Button extends Component {
   subscribeToObservable = (state, props) => ({
     subscription:
       props.observable.subscribe(
-        color => {if (color === props.className) this.triggerAnimation()}
+        color => {if (color === props.color) this.triggerAnimation()}
       )
   })
 
   state = this.subscribeToObservable(this.state, this.props)
-  componentDidUpdate = () => this.setState(subscribeToObservable)
+  // componentDidUpdate = () => this.setState(this.subscribeToObservable)
   componentWillUnmount = () => this.state.subscription.dispose()
 
   handleClick = (event) => {
     event.preventDefault()
     this.triggerAnimation()
-    this.props.onClick(this.props.className)
+    this.props.onClick(this.props.color)
   }
 
   render() {
     return (
       <button
-        className={styles[this.props.className]}
+        className={styles[this.props.color]}
         ref={button => this.button = button}
         onClick={this.handleClick} />
     )
