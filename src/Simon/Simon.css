@@ -1,17 +1,34 @@
+@custom-media --desktop (width >= 500px), (height >= 500px);
+@custom-media --mobile (width <= 500px), (height <= 500px);
+
 .simon {
   height: 90vmin;
   width: 90vmin;
   background-color: #333;
   box-shadow: 0 0 5px #333;
-  border: 30px solid #333;
+  border-style: solid;
+  border-color: #333;
   border-radius: 50%;
   overflow: hidden;
 
   position: relative;
   display: grid;
-  grid-gap: 30px;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   grid-template-areas: "green red"
                         "yellow blue";
+}
+
+@media (--desktop) {
+  .simon {
+    border-width: 25px;
+    grid-gap: 25px;
+  }
+}
+
+@media(--mobile) {
+  .simon {
+    border-width: 15px;
+    grid-gap: 15px;
+  }
 }

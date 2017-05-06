@@ -1,58 +1,83 @@
 import React, {Component} from 'react'
 import styles from './Simon.css';
-import Rx from 'rxjs/Rx';
 
 import Button from 'src/Button'
+import {
+  getObservableWithIntervalFromArray as getObservable,
+  randomizeArray,
+  arrayIncludes
+} from 'src/utils'
 
 export default class Simon extends Component {
-  state = {
-    sequence: Array(10).fill()
-  }
+  COLORS = ['green', 'red', 'blue', 'yellow']
+  MAX_LEVEL = 5
 
-  // min <= Integer <= max
-  spitRandomInteger = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min
-  }
+  resetGame = () => ({
+    sequence: randomizeArray(this.COLORS, this.MAX_LEVEL),
+    buttonPresses: [],
+    currentLevel: 1
+  })
 
-  componentDidMount() {
-    this.animate = [
-      this.animateGreen = this.green.exposeAnimation(),
-      this.animateRed = this.red.exposeAnimation(),
-      this.animateYellow = this.yellow.exposeAnimation(),
-      this.animateBlue = this.blue.exposeAnimation(),
-    ]
+  incrementLevel = (state) => ({
+    currentLevel: state.currentLevel + 1
+  })
 
-    this.setState( ({sequence}) => {
-      const array = sequence.map(() => this.spitRandomInteger(0, 3))
-      const observable = Rx.Observable.interval(1000).take(array.length).map(i => array[i]);
-      return {sequence: observable}
-    })
-  }
+  pushButtonPress = (color) => (state) => ({
+    buttonPresses: state.buttonPresses.push(color)
+  })
 
-  componentDidUpdate() {
-    console.log(this.state.sequence)
-    this.subscribe()
-  }
+  hasGameEnded = () => this.state.currentLevel >= this.MAX_LEVEL
+  hasLevelEnded = () => this.state.buttonPresses.length < this.state.currentLevel
 
+  checkGameState = () => {
+      if (hasGameEnded()) return this.resetGame
+      if (buttonPresses.length < currentLevel) {
+        return console.log('keep playing')
+      }
+      if (buttonPresses.length === currentLevel) {
+        if (arrayIncludes(buttonPresses, sequence)) {
+          this.setState(this.incrementLevel)
+          this.setState(this.resetGame)
+        }
+        this.resetGame()
+      }
+      if (buttonPresses.length > currentLevel) {
+        return this.resetGame()
+      }
+    }
 
-  subscribe = () => {
-    this.subscription = this.state.sequence.subscribe(
-      item => this.animate[item](),
-      error => console.log('onError: ', error),
-      () => console.log('onCompleted'))
-  }
+  state = this.resetGame()
+  componentDidUpdate = () => null
+  componentDidMount = () => null
 
-  componentWillUnmount() {
-    this.subscription.dispose();
+  handleClick = (color) => {
+    this.setState(this.pushButtonPress(color))
   }
 
   render () {
+    const {sequence, level} = this.state
     return (
       <div className={styles.simon}>
-        <Button id='green' ref={green => this.green = green} />
-        <Button id='red' ref={red => this.red = red} />
-        <Button id='blue' ref={blue => this.blue = blue} />
-        <Button id='yellow' ref={yellow => this.yellow = yellow} />
+        <Button
+          className='green'
+          observable={getObservable(sequence, level, 1000)}
+          onClick={this.handleClick}
+        />
+        <Button
+          className='red'
+          observable={getObservable(sequence, level, 1000)}
+          onClick={this.handleClick}
+        />
+        <Button
+          className='blue'
+          observable={getObservable(sequence, level, 1000)}
+          onClick={this.handleClick}
+        />
+        <Button
+          className='yellow'
+          observable={getObservable(sequence, level, 1000)}
+          onClick={this.handleClick}
+        />
       </div>
     )
   }

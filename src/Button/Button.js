@@ -2,31 +2,40 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import styles from './Button.css'
 
+import {lightenAnimation as animation} from 'src/utils'
+
 export default class Button extends Component {
   static propTypes = {
-    id: PropTypes.string.isRequired,
-    animate: PropTypes.func
+    className: PropTypes.string.isRequired,
+    observable: PropTypes.object.isRequired,
+    onClick: PropTypes.func.isRequired,
   }
 
-  keyframes = [
-    {filter: 'brightness(1)'},
-    {filter: 'brightness(2.5)'},
-  ]
+  triggerAnimation = () => this.button.animate(animation.keyframes, animation.options)
 
-  options = {
-    duration: 1000,
-    easing: 'cubic-bezier(0.1, 0.7, 1.0, 0.1)'
+  subscribeToObservable = (state, props) => ({
+    subscription:
+      props.observable.subscribe(
+        color => {if (color === props.className) this.triggerAnimation()}
+      )
+  })
+
+  state = this.subscribeToObservable(this.state, this.props)
+  componentDidUpdate = () => this.setState(subscribeToObservable)
+  componentWillUnmount = () => this.state.subscription.dispose()
+
+  handleClick = (event) => {
+    event.preventDefault()
+    this.triggerAnimation()
+    this.props.onClick(this.props.className)
   }
-
-  triggerAnimation = () => this.button.animate(this.keyframes, this.options)
-  exposeAnimation = () => this.triggerAnimation
 
   render() {
     return (
       <button
-        className={styles[this.props.id]}
+        className={styles[this.props.className]}
         ref={button => this.button = button}
-        onClick={this.triggerAnimation} />
+        onClick={this.handleClick} />
     )
   }
 }
