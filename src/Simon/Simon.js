@@ -1,73 +1,107 @@
 import React, {Component} from 'react'
 import styles from './Simon.css';
+import Rx from 'rxjs/Rx'
 
 import Button from 'src/Button'
+import Console from 'src/Console'
+import GithubCorner from 'src/GithubCorner'
 import {
-  getObservableWithIntervalFromArray as getObservable,
   randomizeArray,
   arrayIncludes
 } from 'src/utils'
 
 export default class Simon extends Component {
+  //DEFINITION
+  SEQUENCE_SPEED = 900
   COLORS = ['green', 'red', 'blue', 'yellow']
   MAX_LEVEL = 5
 
-  resetGame = () => ({
+  static stateTypes = {
+    sequence: 'array',
+    buttonPresses: 'array',
+    currentLevel: 'number',
+    observable: 'observable'
+  }
+
+  // STATE SETTERS
+  resetGame = (state, props) => ({
     sequence: randomizeArray(this.COLORS, this.MAX_LEVEL),
     buttonPresses: [],
-    currentLevel: 1
+    currentLevel: 10,  // should initialize to 1
   })
 
-  state = this.resetGame()
-
-  wonLevel = () => ({
+  levelWon = (state, props) => ({
     buttonPresses: [],
     currentLevel: state.currentLevel + 1
   })
 
-  lostLevel = () => ({
+  levelLost = (state, props) => ({
     buttonPresses: []
   })
 
-  pushButtonPress = (color) => (state) => ({
+  buttonWasPressed = (color) => (state, props) => ({
     buttonPresses: [...state.buttonPresses, color]
   })
 
+  createObservable = (state, props) => ({
+    observable:
+      Rx.Observable
+      .interval(this.SEQUENCE_SPEED)
+      .take(state.currentLevel)
+      .map(x => state.sequence[x])
+  })
+
+  // CONDITIONALS
   hasGameEnded = () => this.state.currentLevel >= this.MAX_LEVEL
   hasLevelEnded = () => this.state.buttonPresses.length === this.state.currentLevel
   isPlayerCorrect = () => arrayIncludes(this.state.buttonPresses, this.state.sequence)
 
+  // CLASS METHODS
   checkGameState = () => {
-      if (hasGameEnded()) {
-        return this.setState(this.resetGame)
-      }
-      if (hasLevelEnded()) {
-        isPlayerCorrect()
-          ? this.setState(this.wonLevel)
-          : this.setState(this.lostLevel)
-      }
+    if (this.hasGameEnded()) {
+      this.setState(this.resetGame)
     }
-
-  componentDidUpdate = () => null
-  componentDidMount = () => null
-
-  handleClick = (color) => {
-    this.setState(this.pushButtonPress(color))
+    else if (this.hasLevelEnded()) {
+      this.isPlayerCorrect()
+        ? this.setState(this.wonLevel)
+        : this.setState(this.lostLevel)
+    }
   }
 
+  handleClick = (color) => {
+    this.setState(this.buttonWasPressed(color))
+  }
+
+  // LIFECYCLE
+  componentWillMount = () => {
+    this.setState(this.resetGame)
+    this.setState(this.createObservable)
+  }
+
+  componentDidUpdate = () => this.checkGameState()
+
   render () {
-    const {sequence, level} = this.state
     return (
-      <div className={styles.simon}>
-        {this.COLORS.map((color) => (
-          <Button
-            key={color}
-            color={color}
-            observable={getObservable(sequence, level, 1000)}
-            onClick={this.handleClick}
-          />
-        ))}
+      <div className={styles.app}>
+        <div className={styles.simon}>
+          {this.COLORS.map((color) => (
+            <Button
+              key={color}
+              color={color}
+              observable={this.state.observable}
+              onClick={this.handleClick}
+            />
+          ))}
+          <Console />
+        </div>
+
+        <GithubCorner
+          repository='https://github.com/anthony2025/simon-game'
+          bgColor='white'
+          mainColor='#9F0F17'
+        />
       </div>
+
     )
   }
 }

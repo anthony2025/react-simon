@@ -9,20 +9,22 @@ export const randomizeArray = (source, length) => (
 )
 
 export const getObservableWithIntervalFromArray = (array, length, interval) => (
-  Rx.Observable.interval(interval).take(array.length).map(i => array[i])
+  Rx.Observable.interval(interval).take(length).map(i => array[i])
 )
 
 export const arrayIncludes = (arrayA, arrayB) => (
   arrayA.every((item, index) => item === arrayB[index])
 )
 
-export const lightenAnimation = {
-  keyframes: [
+export const lightenAnimation = (element, length) => {
+  const keyframes = [
     {filter: 'brightness(1)'},
-    {filter: 'brightness(2.5)'},
-  ],
-  options: {
-    duration: 750,
+    {filter: 'brightness(2.5)'}
+  ]
+  const options = {
+    duration: length,
     easing: 'cubic-bezier(0.1, 0.7, 1.0, 0.1)'
   }
+  element.animate(keyframes, options)
 }
+

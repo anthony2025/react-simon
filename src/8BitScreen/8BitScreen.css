@@ -1,0 +1,47 @@
+:root {
+  --green: #00A74A;
+  --red: #9F0F17;
+  --blue: #094A8F;
+  --yellow: #CCA707;
+  --borderColor: #333;
+  --whiteColor: #DDD;
+}
+
+.console {
+  height: 45vmin;
+  width: 45vmin;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: white;
+  border: var(--borderColor) solid 15px;
+  border-radius: 50%;
+
+  text-align: center;
+  padding-top: 10vmin;
+}
+
+.title {
+  font-size: 10vmin;
+  font-family: Tahoma, sans-serif;
+  letter-spacing: -.5vmin;
+  font-weight: bolder;
+}
+
+.sup {
+  font-size: 5vmin;
+}
+
+.start {
+  height: 7vmin;
+  width: 7vmin;
+
+  margin-top: 5vmin;
+  background-color: var(--red);
+  border: var(--borderColor) solid 5px;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px var(--borderColor);
+}

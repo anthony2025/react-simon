@@ -8,7 +8,7 @@ A responsive website made for Rose's Daycare LLC powered by React and CSS Module
   * [CSS Modules][css-modules] and [PostCSS-cssnext][css-next]
   * Layout purely in Flexbox
   * Webpack config powered by [nwb]
-  * [Firebase] for a serverless database and hosting
+  * [Firebase] for hosting
 
 ![Screenshot](/assets/screenshot.png?raw=true)
 
@@ -29,9 +29,7 @@ A responsive website made for Rose's Daycare LLC powered by React and CSS Module
 ## To Do
   * Replace react-modal with a custom-made modal following [react-modal-dialog] ideas
 
-[react-modal-dialog]: https://github.com/qimingweng/react-modal-dialog
 [react]: https://github.com/facebook/react
-[react-router]: https://github.com/ReactTraining/react-router
 [nwb]: https://github.com/insin/nwb
 [firebase]: https://firebase.google.com/docs/reference/rest/database/
 [css-modules]: https://github.com/css-modules/css-modules

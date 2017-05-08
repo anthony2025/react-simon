@@ -1,13 +1,17 @@
 @custom-media --desktop (width >= 500px), (height >= 500px);
 @custom-media --mobile (width <= 500px), (height <= 500px);
 
+:root {
+  --borderColor: #333;
+}
+
 .simon {
   height: 90vmin;
   width: 90vmin;
-  background-color: #333;
-  box-shadow: 0 0 5px #333;
+  background-color: var(--borderColor);
+  box-shadow: 0 0 5px var(--borderColor);
   border-style: solid;
-  border-color: #333;
+  border-color: var(--borderColor);
   border-radius: 50%;
   overflow: hidden;
 
