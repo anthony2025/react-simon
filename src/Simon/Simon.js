@@ -15,7 +15,7 @@ export default class Simon extends Component {
 
   state = {
     sequence: randomizeArray(this.COLORS, this.MAX_LEVEL),
-    buttonPresses: [],
+    colorPresses: [],
     currentLevel: 1,
     observable: 'observable',
     strict: false
@@ -24,21 +24,21 @@ export default class Simon extends Component {
   // STATE SETTERS
   resetGame = (state, props) => ({
     sequence: randomizeArray(this.COLORS, this.MAX_LEVEL),
-    buttonPresses: [],
+    colorPresses: [],
     currentLevel: 1
   })
 
   levelWon = (state, props) => ({
-    buttonPresses: [],
+    colorPresses: [],
     currentLevel: state.currentLevel + 1
   })
 
   levelLost = (state, props) => ({
-    buttonPresses: []
+    colorPresses: []
   })
 
-  buttonWasPressed = (color) => (state, props) => ({
-    buttonPresses: [...state.buttonPresses, color]
+  colorWasPressed = (color) => (state, props) => ({
+    colorPresses: [...state.colorPresses, color]
   })
 
   createObservable = (state, props) => ({
@@ -51,14 +51,14 @@ export default class Simon extends Component {
 
   // CONDITIONALS
   isLastLevel = () => this.state.currentLevel >= this.MAX_LEVEL
-  hasLevelEnded = () => this.state.buttonPresses.length === this.state.currentLevel
-  hasPlayerMadeMistake = () => !arrayIncludes(this.state.buttonPresses, this.state.sequence)
-  isStrictModeOn = () => this.state.strict
+  hasLevelEnded = () => this.state.colorPresses.length === this.state.currentLevel
+  hasPlayerMadeMistake = () => !arrayIncludes(this.state.colorPresses, this.state.sequence)
+  isStrict = () => this.state.strict
 
   // CLASS METHODS
   checkGameState = () => {
     if (this.hasPlayerMadeMistake()) {
-      if (this.isStrictModeOn()) {
+      if (this.isStrict()) {
         return this.setState(this.resetGame, console.log('you lost, resetting game'))
       }
       this.setState(this.levelLost, console.log('wrong answer, resetting level'))
@@ -71,10 +71,14 @@ export default class Simon extends Component {
     }
   }
 
-  handleClick = (color) => {
+  handleColorClick = (color) => {
     this.setState(
-      this.buttonWasPressed(color),
+      this.colorWasPressed(color),
     )
+  }
+
+  handleStrictClick = () => {
+    this.setState((state, props) => ({strict: !state.strict}))
   }
 
   // LIFECYCLE
@@ -95,10 +99,14 @@ export default class Simon extends Component {
               key={color}
               color={color}
               observable={this.state.observable}
-              onClick={this.handleClick}
+              onClick={this.handleColorClick}
             />
           ))}
-          <Console onClick={() => console.log('reset button was clicked')}/>
+          <Console
+            isStrict={this.state.strict}
+            onStrictClick={this.handleStrictClick}
+            onResetClick={this.handleResetClick}
+          />
         </div>
 
         <GithubCorner

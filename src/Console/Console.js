@@ -1,21 +1,34 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './Console.css'
 
-export default class Console extends Component {
-  static propTypes = {
-    onClick: PropTypes.func
-  }
+Console.propTypes = {
+  isStrict: PropTypes.bool.isRequired
+}
 
-  render() {
-    return (
-      <div className={styles.console}>
-        <div className={styles.title}>
-          Simon<sup className={styles.sup}>&reg;</sup>
-        </div>
-        <button className={styles.reset} onClick={this.props.onClick}/>
-        <div className={styles.resetLabel}>RESET</div>
+export default function Console (props) {
+  const strictClass = (props.isStrict) ? styles.strictOn : styles.strict
+  return (
+    <div className={styles.console}>
+      <div className={styles.title}>
+        Simon<sup className={styles.sup}>&reg;</sup>
       </div>
-    )
-  }
+
+      <div className={styles.reset}>
+        <button
+          className={styles.button}
+          onClick={props.onResetClick}
+        />
+        <div className={styles.label}>RESET</div>
+      </div>
+
+      <div className={strictClass}>
+        <button
+          className={styles.button}
+          onClick={props.onStrictClick}
+        />
+        <div className={styles.label}>STRICT</div>
+      </div>
+    </div>
+  )
 }

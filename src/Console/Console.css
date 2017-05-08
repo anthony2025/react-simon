@@ -3,8 +3,8 @@
   --red: #9F0F17;
   --blue: #094A8F;
   --yellow: #CCA707;
-  --borderColor: #333;
-  --whiteColor: #DDD;
+  --gray: #333;
+  --white: #DDD;
 }
 
 .console {
@@ -16,37 +16,68 @@
   left: 50%;
   transform: translate(-50%, -50%);
 
-  background-color: white;
-  border: var(--borderColor) solid 15px;
+  background-color: var(--white);
+  border: var(--gray) solid 15px;
   border-radius: 50%;
 
-  text-align: center;
-  padding-top: 10vmin;
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .title {
-  font-size: 10vmin;
+  width: 100%;
+  margin-left: 4vmin;
+  margin-bottom: 3vmin;
+  font-size: 9.5vmin;
   font-family: Tahoma, sans-serif;
   letter-spacing: -.5vmin;
   font-weight: bolder;
+  & .sup {
+    font-size: 5vmin;
+  }
 }
 
-.sup {
-  font-size: 5vmin;
+.item {
+  margin: 1vmin;
+  text-align: center;
+}
+
+.button {
+  height: 8vmin;
+  width: 8vmin;
+  border: var(--gray) solid 5px;
+  border-radius: 50%;
+  box-shadow: 0 1px 5px var(--gray);
+}
+
+.label {
+  margin-top: .5vmin;
+  font-size: 2vmin;
 }
 
 .reset {
-  height: 8vmin;
-  width: 8vmin;
-
-  margin-top: 5vmin;
-  background-color: var(--red);
-  border: var(--borderColor) solid 5px;
-  border-radius: 50%;
-  box-shadow: 0 1px 5px var(--borderColor);
+  composes: item;
+  & .button {
+    background-color: var(--red);
+  }
+  & .button:active {
+    transition: .1s;
+    filter: brightness(1.5)
+  }
 }
 
-.resetLabel {
-  margin-top: .5vmin;
-  font-size: 2vmin;
+.strict {
+  composes: item;
+  & .button {
+    background-color: var(--yellow);
+  }
+}
+
+.strictOn {
+  composes: strict;
+  & .button {
+    filter: brightness(1.5)
+  }
 }
