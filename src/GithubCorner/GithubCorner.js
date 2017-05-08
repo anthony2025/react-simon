@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styles from './GithubCorner.css'
 
 /**
- * Github Corners by Tim Holman
+ * wrapper of Tim Holman's Github Corners
  * https://github.com/tholman/github-corners
  */
 

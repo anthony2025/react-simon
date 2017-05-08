@@ -35,7 +35,7 @@
   font-size: 5vmin;
 }
 
-.start {
+.reset {
   height: 7vmin;
   width: 7vmin;
 
@@ -43,5 +43,9 @@
   background-color: var(--red);
   border: var(--borderColor) solid 5px;
   border-radius: 50%;
-  box-shadow: 0 2px 6px var(--borderColor);
+  box-shadow: 0 1px 5px var(--borderColor);
+}
+
+.resetLabel {
+margin-top: .5vmin;
 }

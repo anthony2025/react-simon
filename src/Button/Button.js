@@ -2,9 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import styles from './Button.css'
 
-import {
-  lightenAnimation as lighten
-} from 'src/utils'
+import {lightenAnimation as lighten} from 'src/utils'
 
 export default class Button extends Component {
   // DEFINITION
@@ -32,7 +30,6 @@ export default class Button extends Component {
   })
 
   // CLASS METHODS
-
   handleClick = (event) => {
     event.preventDefault()
     lighten(this.button, this.ANIMATION_SPEED)

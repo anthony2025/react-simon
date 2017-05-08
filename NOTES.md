@@ -1,4 +1,3 @@
-### Later:
 * Readme
 * More observables
 * Redux
@@ -9,3 +8,4 @@
 * refactor animation util method
 * change styling to vmin's
 * add console screen
+* check how else has been done

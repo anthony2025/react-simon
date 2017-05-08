@@ -78,7 +78,7 @@ export default class Simon extends Component {
     this.setState(this.createObservable)
   }
 
-  componentDidUpdate = () => this.checkGameState()
+  // componentDidUpdate = () => this.checkGameState()
 
   render () {
     return (
@@ -92,7 +92,7 @@ export default class Simon extends Component {
               onClick={this.handleClick}
             />
           ))}
-          <Console />
+          <Console onClick={() => console.log('reset button was clicked')}/>
         </div>
 
         <GithubCorner
