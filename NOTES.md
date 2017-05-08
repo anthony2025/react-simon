@@ -1,13 +1,9 @@
 * Readme
-* More observables
+* Observable
 * Redux
-* Github Corner
-* consider component handlers
-* testing, with more functional methods
-* write tiny reactive observable
+* testing
 * refactor animation util method
 * change styling to vmin's
-* add console screen
 * check how else has been done
 * separate game logic on another component
 * include setstate in functions

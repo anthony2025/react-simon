@@ -47,5 +47,6 @@
 }
 
 .resetLabel {
+  margin-top: .5vmin;
   font-size: 2vmin;
 }

@@ -17,7 +17,8 @@ export default class Simon extends Component {
     sequence: randomizeArray(this.COLORS, this.MAX_LEVEL),
     buttonPresses: [],
     currentLevel: 1,
-    observable: 'observable'
+    observable: 'observable',
+    strict: false
   }
 
   // STATE SETTERS
@@ -52,15 +53,19 @@ export default class Simon extends Component {
   isLastLevel = () => this.state.currentLevel >= this.MAX_LEVEL
   hasLevelEnded = () => this.state.buttonPresses.length === this.state.currentLevel
   hasPlayerMadeMistake = () => !arrayIncludes(this.state.buttonPresses, this.state.sequence)
+  isStrictModeOn = () => this.state.strict
 
   // CLASS METHODS
   checkGameState = () => {
     if (this.hasPlayerMadeMistake()) {
-      return this.setState(this.levelLost, console.log('wrong answer, resetting level'))
+      if (this.isStrictModeOn()) {
+        return this.setState(this.resetGame, console.log('you lost, resetting game'))
+      }
+      this.setState(this.levelLost, console.log('wrong answer, resetting level'))
     }
     if (this.hasLevelEnded()) {
       if (this.isLastLevel()) {
-        return this.setState(this.resetGame, console.log('you won all levels'))
+        return this.setState(this.resetGame, console.log('you won, reseting game'))
       }
       this.setState(this.levelWon, console.log('right answer, next level'))
     }

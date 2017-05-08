@@ -15,7 +15,8 @@ export default class Button extends Component {
   }
 
   state = {
-    subscription: 'observer'
+    subscription: 'observer',
+    sound: new Audio(`audio/sound-${this.props.color}.mp3`)
   }
 
   // STATE SETTERS
@@ -33,6 +34,7 @@ export default class Button extends Component {
   handleClick = (event) => {
     event.preventDefault()
     lighten(this.button, this.ANIMATION_SPEED)
+    this.state.sound.play()
     this.props.onClick(this.props.color)
   }
 
