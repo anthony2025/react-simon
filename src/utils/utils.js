@@ -8,10 +8,6 @@ export const randomizeArray = (source, length) => (
   Array(length).fill().map(() => source[spitRandomInteger(0, source.length-1)])
 )
 
-export const getObservableWithIntervalFromArray = (array, length, interval) => (
-  Rx.Observable.interval(interval).take(length).map(i => array[i])
-)
-
 export const arrayIncludes = (arrayA, arrayB) => (
   arrayA.every((item, index) => item === arrayB[index])
 )

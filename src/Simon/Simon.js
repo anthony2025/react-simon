@@ -5,21 +5,18 @@ import Rx from 'rxjs/Rx'
 import Button from 'src/Button'
 import Console from 'src/Console'
 import GithubCorner from 'src/GithubCorner'
-import {
-  randomizeArray,
-  arrayIncludes
-} from 'src/utils'
+import {randomizeArray, arrayIncludes} from 'src/utils'
 
 export default class Simon extends Component {
   //DEFINITION
   SEQUENCE_SPEED = 900
   COLORS = ['green', 'red', 'blue', 'yellow']
-  MAX_LEVEL = 5
+  MAX_LEVEL = 10
 
-  static stateTypes = {
-    sequence: 'array',
-    buttonPresses: 'array',
-    currentLevel: 'number',
+  state = {
+    sequence: randomizeArray(this.COLORS, this.MAX_LEVEL),
+    buttonPresses: [],
+    currentLevel: 1,
     observable: 'observable'
   }
 
@@ -27,7 +24,7 @@ export default class Simon extends Component {
   resetGame = (state, props) => ({
     sequence: randomizeArray(this.COLORS, this.MAX_LEVEL),
     buttonPresses: [],
-    currentLevel: 10,  // should initialize to 1
+    currentLevel: 1
   })
 
   levelWon = (state, props) => ({
@@ -52,33 +49,37 @@ export default class Simon extends Component {
   })
 
   // CONDITIONALS
-  hasGameEnded = () => this.state.currentLevel >= this.MAX_LEVEL
+  isLastLevel = () => this.state.currentLevel >= this.MAX_LEVEL
   hasLevelEnded = () => this.state.buttonPresses.length === this.state.currentLevel
-  isPlayerCorrect = () => arrayIncludes(this.state.buttonPresses, this.state.sequence)
+  hasPlayerMadeMistake = () => !arrayIncludes(this.state.buttonPresses, this.state.sequence)
 
   // CLASS METHODS
   checkGameState = () => {
-    if (this.hasGameEnded()) {
-      this.setState(this.resetGame)
+    if (this.hasPlayerMadeMistake()) {
+      return this.setState(this.levelLost, console.log('wrong answer, resetting level'))
     }
-    else if (this.hasLevelEnded()) {
-      this.isPlayerCorrect()
-        ? this.setState(this.wonLevel)
-        : this.setState(this.lostLevel)
+    if (this.hasLevelEnded()) {
+      if (this.isLastLevel()) {
+        return this.setState(this.resetGame, console.log('you won all levels'))
+      }
+      this.setState(this.levelWon, console.log('right answer, next level'))
     }
   }
 
   handleClick = (color) => {
-    this.setState(this.buttonWasPressed(color))
+    this.setState(
+      this.buttonWasPressed(color),
+    )
   }
 
   // LIFECYCLE
   componentWillMount = () => {
-    this.setState(this.resetGame)
     this.setState(this.createObservable)
   }
 
-  // componentDidUpdate = () => this.checkGameState()
+  componentDidUpdate = () => {
+    this.checkGameState()
+  }
 
   render () {
     return (

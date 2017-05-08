@@ -9,3 +9,5 @@
 * change styling to vmin's
 * add console screen
 * check how else has been done
+* separate game logic on another component
+* include setstate in functions

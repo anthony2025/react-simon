@@ -6,7 +6,7 @@ import {lightenAnimation as lighten} from 'src/utils'
 
 export default class Button extends Component {
   // DEFINITION
-  ANIMATION_SPEED = 750
+  ANIMATION_SPEED = 650
 
   static propTypes = {
     color: PropTypes.string.isRequired,
@@ -14,7 +14,7 @@ export default class Button extends Component {
     onClick: PropTypes.func.isRequired,
   }
 
-  static stateTypes = {
+  state = {
     subscription: 'observer'
   }
 

@@ -11,7 +11,7 @@ html {
 
 body {
   font: 16px/1 'Helvetica Neue', Helvetica;
-  background: url("/background.jpg") repeat;
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("/background.jpg") repeat;
   margin: 0;
   height: 100vh;
   width: 100%;

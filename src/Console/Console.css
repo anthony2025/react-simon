@@ -36,8 +36,8 @@
 }
 
 .reset {
-  height: 7vmin;
-  width: 7vmin;
+  height: 8vmin;
+  width: 8vmin;
 
   margin-top: 5vmin;
   background-color: var(--red);
@@ -47,5 +47,5 @@
 }
 
 .resetLabel {
-margin-top: .5vmin;
+  font-size: 2vmin;
 }
