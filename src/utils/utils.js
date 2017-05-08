@@ -4,11 +4,11 @@ export const spitRandomInteger = (min, max) => (
   Math.floor(Math.random() * (max - min + 1)) + min
 )
 
-export const randomizeArray = (source, length) => (
+export const randomizedArray = (source, length) => (
   Array(length).fill().map(() => source[spitRandomInteger(0, source.length-1)])
 )
 
-export const arrayIncludes = (arrayA, arrayB) => (
+export const isArrayIncluded = (arrayA, arrayB) => (
   arrayA.every((item, index) => item === arrayB[index])
 )
 

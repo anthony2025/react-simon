@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './Console.css'
 
+import EightBitScreen from 'src/EightBitScreen'
+
 Console.propTypes = {
   isStrict: PropTypes.bool.isRequired
 }
@@ -14,13 +16,7 @@ export default function Console (props) {
         Simon<sup className={styles.sup}>&reg;</sup>
       </div>
 
-      <div className={styles.reset}>
-        <button
-          className={styles.button}
-          onClick={props.onResetClick}
-        />
-        <div className={styles.label}>RESET</div>
-      </div>
+      <EightBitScreen />
 
       <div className={strictClass}>
         <button
@@ -28,6 +24,14 @@ export default function Console (props) {
           onClick={props.onStrictClick}
         />
         <div className={styles.label}>STRICT</div>
+      </div>
+
+      <div className={styles.reset}>
+        <button
+          className={styles.button}
+          onClick={props.onResetClick}
+        />
+        <div className={styles.label}>RESET</div>
       </div>
     </div>
   )

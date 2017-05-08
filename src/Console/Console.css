@@ -1,23 +1,22 @@
+@custom-media --desktop (width >= 500px), (height >= 500px);
+@custom-media --mobile (width <= 500px), (height <= 500px);
+
 :root {
-  --green: #00A74A;
   --red: #9F0F17;
-  --blue: #094A8F;
   --yellow: #CCA707;
   --gray: #333;
   --white: #DDD;
 }
 
 .console {
-  height: 45vmin;
-  width: 45vmin;
-
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 
   background-color: var(--white);
-  border: var(--gray) solid 15px;
+  border-color: var(--gray);
+  border-style: solid;
   border-radius: 50%;
 
   display: flex;
@@ -28,9 +27,8 @@
 
 .title {
   width: 100%;
-  margin-left: 4vmin;
   margin-bottom: 3vmin;
-  font-size: 9.5vmin;
+  font-size: 9vmin;
   font-family: Tahoma, sans-serif;
   letter-spacing: -.5vmin;
   font-weight: bolder;
@@ -45,16 +43,14 @@
 }
 
 .button {
-  height: 8vmin;
-  width: 8vmin;
   border: var(--gray) solid 5px;
   border-radius: 50%;
   box-shadow: 0 1px 5px var(--gray);
 }
 
 .label {
-  margin-top: .5vmin;
-  font-size: 2vmin;
+  margin-top: .75vmin;
+  font-family: Helvetica;
 }
 
 .reset {
@@ -63,7 +59,7 @@
     background-color: var(--red);
   }
   & .button:active {
-    transition: .1s;
+    transition: .05s;
     filter: brightness(1.5)
   }
 }
@@ -79,5 +75,41 @@
   composes: strict;
   & .button {
     filter: brightness(1.5)
+  }
+}
+
+@media (--desktop) {
+  .console {
+    height: 45vmin;
+    width: 45vmin;
+    border-width: 20px;
+  }
+  .title {
+    margin-left: 5.2vmin;
+  }
+  .button {
+    height: 8vmin;
+    width: 8vmin;
+  }
+  .label {
+   font-size: 1.75vmin;
+  }
+}
+
+@media(--mobile) {
+  .console {
+    height: 55vmin;
+    width: 55vmin;
+    border-width: 10px;
+  }
+  .title {
+    margin-left: 10vmin;
+  }
+  .button {
+    height: 10vmin;
+    width: 10vmin;
+  }
+  .label {
+    font-size: 2.25vmin;
   }
 }

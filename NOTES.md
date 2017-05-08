@@ -1,10 +1,8 @@
-* Readme
 * Observable
 * Redux
-* testing
-* refactor animation util method
-* change styling to vmin's
-* check how else has been done
+* Testing
+
+* consider constants
+* divide utils
 * separate game logic on another component
-* include setstate in functions
-* move things to stateless functions
+* Readme
