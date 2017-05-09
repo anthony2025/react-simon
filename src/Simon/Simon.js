@@ -4,19 +4,19 @@ import styles from './Simon.css';
 import Rx from 'rxjs/Rx'
 import getRandomArray from 'src/utils/getRandomArray'
 import isArrayIncluded from 'src/utils/isArrayIncluded'
+import {
+  SEQUENCE_SPEED,
+  COLORS,
+  MAX_LEVEL
+} from 'src/utils/constants'
 
 import Pad from 'src/Pad'
 import Console from 'src/Console'
 import GithubCorner from 'src/GithubCorner'
 
 export default class Simon extends Component {
-  //DEFINITION
-  SEQUENCE_SPEED = 750
-  COLORS = ['green', 'red', 'blue', 'yellow']
-  MAX_LEVEL = 10
-
   state = {
-    sequence: getRandomArray(this.COLORS, this.MAX_LEVEL),
+    sequence: getRandomArray(COLORS, MAX_LEVEL),
     played: [],
     currentLevel: 2, // should be 1 in production
     observable: 'observable',
@@ -25,7 +25,7 @@ export default class Simon extends Component {
 
   // STATE SETTERS
   resetGame = (state, props) => ({
-    sequence: getRandomArray(this.COLORS, this.MAX_LEVEL),
+    sequence: getRandomArray(COLORS, MAX_LEVEL),
     played: [],
     currentLevel: 1
   })
@@ -38,7 +38,7 @@ export default class Simon extends Component {
   })
 
   // STATE GETTERS
-  isLastLevel = () => this.state.currentLevel >= this.MAX_LEVEL
+  isLastLevel = () => this.state.currentLevel >= MAX_LEVEL
   hasLevelEnded = () => this.state.played.length === this.state.currentLevel
   hasPlayerMadeMistake = () => !isArrayIncluded(this.state.played, this.state.sequence)
   isStrictModeOn = () => this.state.strict
@@ -65,7 +65,7 @@ export default class Simon extends Component {
   createObservable = (state, props) => ({
     observable:
       Rx.Observable
-      .interval(this.SEQUENCE_SPEED)
+      .interval(SEQUENCE_SPEED)
       .take(state.currentLevel)
       .map(x => state.sequence[x])
   })
@@ -95,7 +95,7 @@ export default class Simon extends Component {
         />
 
         <div className={styles.simon}>
-          {this.COLORS.map((color) => (
+          {COLORS.map((color) => (
             <Pad
               key={color}
               color={color}

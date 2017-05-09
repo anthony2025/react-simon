@@ -1,4 +1,6 @@
-const lightenAnimation = (element, length) => {
+import {ANIMATION_SPEED} from 'src/utils/constants'
+
+const lightenAnimation = (element, length=ANIMATION_SPEED) => {
   const keyframes = [
     {filter: 'brightness(1)'},
     {filter: 'brightness(2.5)'}

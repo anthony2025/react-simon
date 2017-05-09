@@ -5,9 +5,6 @@ import styles from './Pad.css'
 import lightenAnimation from 'src/utils/lightenAnimation'
 
 export default class Pad extends Component {
-  // DEFINITION
-  ANIMATION_SPEED = 500
-
   state = {
     subscription: null
   }
@@ -19,7 +16,7 @@ export default class Pad extends Component {
   }
 
   // INTERACTION METHODS
-  animation = () => lightenAnimation(this.button, this.ANIMATION_SPEED)
+  animation = () => lightenAnimation(this.pad)
   sound = () => new Audio(`audio/sound-${this.props.color}.mp3`).play()
 
   // OBSERVABLE
@@ -50,7 +47,7 @@ export default class Pad extends Component {
     return (
       <button
         className={styles[this.props.color]}
-        ref={button => this.button = button}
+        ref={pad => this.pad = pad}
         onClick={this.handleClick}
       />
     )
