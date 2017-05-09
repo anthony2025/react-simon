@@ -51,7 +51,7 @@ export default class Simon extends Component {
       else {
         this.setState(this.redoLevel)
       }
-      return this.refreshObservable()
+      return this.setState(this.createObservable)
     }
     if (this.hasLevelEnded()) {
       if (this.isLastLevel()) {
@@ -60,35 +60,22 @@ export default class Simon extends Component {
       else {
         this.setState(this.nextLevel)
       }
-      return this.refreshObservable()
+      this.setState(this.createObservable)
     }
   }
 
   // OBSERVABLE
-  createObservable = () => {
-    this.observable = Rx.Observable
+  createObservable = (state, props) => ({
+    observable: Rx.Observable
       .interval(SEQUENCE_SPEED)
-      .take(this.state.currentLevel)
-      .map(i => this.state.sequence[i])
-  }
-
-  subscribe = () => {
-    this.observable.subscribe(
-      (color) => {
-        this[color].light()
-      }
-    )
-  }
-
-  refreshObservable = () => {
-    this.createObservable()
-    this.subscribe()
-  }
+      .take(state.currentLevel)
+      .map(i => state.sequence[i])
+      .subscribe((color) => this[color].light())
+    })
 
   // LIFECYCLE METHODS
-  componentWillMount = () => {
-    this.createObservable()
-    this.subscribe()
+  componentDidMount = () => {
+      this.setState(this.createObservable)
   }
   componentDidUpdate = () => this.checkGameState()
 
