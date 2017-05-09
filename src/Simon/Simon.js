@@ -18,8 +18,7 @@ export default class Simon extends Component {
   state = {
     sequence: getRandomArray(COLORS, MAX_LEVEL),
     played: [],
-    currentLevel: 2, // should be 1 in production
-    observable: 'observable',
+    currentLevel: 1, // should be 1 in production
     strict: false
   }
 
@@ -46,32 +45,51 @@ export default class Simon extends Component {
   // GAME LOGIC
   checkGameState = () => {
     if (this.hasPlayerMadeMistake()) {
-      this.green.animation()
       if (this.isStrictModeOn()) {
-        return this.setState(this.resetGame)
+        this.setState(this.resetGame)
       }
-      this.setState(this.redoLevel)
-      return this.setState(this.createObservable)
+      else {
+        this.setState(this.redoLevel)
+      }
+      return this.refreshObservable()
     }
     if (this.hasLevelEnded()) {
       if (this.isLastLevel()) {
-        return this.setState(this.resetGame)
+        this.setState(this.resetGame)
       }
-      return this.setState(this.nextLevel)
+      else {
+        this.setState(this.nextLevel)
+      }
+      return this.refreshObservable()
     }
   }
 
   // OBSERVABLE
-  createObservable = (state, props) => ({
-    observable:
-      Rx.Observable
+  createObservable = () => {
+    this.observable = Rx.Observable
       .interval(SEQUENCE_SPEED)
-      .take(state.currentLevel)
-      .map(x => state.sequence[x])
-  })
+      .take(this.state.currentLevel)
+      .map(i => this.state.sequence[i])
+  }
+
+  subscribe = () => {
+    this.observable.subscribe(
+      (color) => {
+        this[color].light()
+      }
+    )
+  }
+
+  refreshObservable = () => {
+    this.createObservable()
+    this.subscribe()
+  }
 
   // LIFECYCLE METHODS
-  componentWillMount = () => this.setState(this.createObservable)
+  componentWillMount = () => {
+    this.createObservable()
+    this.subscribe()
+  }
   componentDidUpdate = () => this.checkGameState()
 
   // BUTTON HANDLERS
@@ -99,8 +117,7 @@ export default class Simon extends Component {
             <Pad
               key={color}
               color={color}
-              ref={pad => this[color] = pad} // not for production
-              observable={this.state.observable}
+              ref={pad => this[color] = pad} // should be removed in production
               onClick={this.handlePadClick}
             />
           ))}

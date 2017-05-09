@@ -6,34 +6,17 @@ import lightenAnimation from 'src/utils/lightenAnimation'
 
 export default class Pad extends Component {
   state = {
-    subscription: null
   }
 
   static propTypes = {
     color: PropTypes.string.isRequired,
-    observable: PropTypes.object.isRequired,
     onClick: PropTypes.func.isRequired,
   }
 
   // INTERACTION METHODS
   animation = () => lightenAnimation(this.pad)
   sound = () => new Audio(`audio/sound-${this.props.color}.mp3`).play()
-
-  // OBSERVABLE
-  subscribe = (state, props) => ({
-    subscription: props.observable.subscribe(
-      (color)  => {
-        if (color === props.color) {
-          this.animation()
-          this.sound()
-        }
-      }
-    )
-  })
-
-  // LIFECYCLE METHODS
-  componentDidMount = () => this.setState(this.subscribe, this.forceUpdate())
-  componentWillUnmount = () => this.state.subscription.dispose()
+  light = () => {this.animation(); this.sound()}
 
   // BUTTON HANDLERS
   handleClick = (event) => {

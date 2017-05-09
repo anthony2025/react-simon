@@ -2,6 +2,7 @@
 * Redux
 * Testing
 
-* consider constants
 * Readme
-* separate game logic on another component
+* make things smaller
+* figure out what to do with things not in state
+
