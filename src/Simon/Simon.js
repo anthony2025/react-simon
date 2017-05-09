@@ -2,9 +2,10 @@ import React, {Component} from 'react'
 import styles from './Simon.css';
 
 import Rx from 'rxjs/Rx'
-import {randomizedArray, isArrayIncluded} from 'src/utils'
+import getRandomArray from 'src/utils/getRandomArray'
+import isArrayIncluded from 'src/utils/isArrayIncluded'
 
-import Button from 'src/Button'
+import Pad from 'src/Pad'
 import Console from 'src/Console'
 import GithubCorner from 'src/GithubCorner'
 
@@ -15,7 +16,7 @@ export default class Simon extends Component {
   MAX_LEVEL = 10
 
   state = {
-    sequence: randomizedArray(this.COLORS, this.MAX_LEVEL),
+    sequence: getRandomArray(this.COLORS, this.MAX_LEVEL),
     played: [],
     currentLevel: 2, // should be 1 in production
     observable: 'observable',
@@ -24,7 +25,7 @@ export default class Simon extends Component {
 
   // STATE SETTERS
   resetGame = (state, props) => ({
-    sequence: randomizedArray(this.COLORS, this.MAX_LEVEL),
+    sequence: getRandomArray(this.COLORS, this.MAX_LEVEL),
     played: [],
     currentLevel: 1
   })
@@ -45,6 +46,7 @@ export default class Simon extends Component {
   // GAME LOGIC
   checkGameState = () => {
     if (this.hasPlayerMadeMistake()) {
+      this.green.animation()
       if (this.isStrictModeOn()) {
         return this.setState(this.resetGame)
       }
@@ -73,7 +75,7 @@ export default class Simon extends Component {
   componentDidUpdate = () => this.checkGameState()
 
   // BUTTON HANDLERS
-  handleColorClick = (color) => {
+  handlePadClick = (color) => {
     this.setState((state) => ({played: [...state.played, color]}))
   }
   handleStrictClick = () => {
@@ -94,11 +96,12 @@ export default class Simon extends Component {
 
         <div className={styles.simon}>
           {this.COLORS.map((color) => (
-            <Button
+            <Pad
               key={color}
               color={color}
+              ref={pad => this[color] = pad} // not for production
               observable={this.state.observable}
-              onClick={this.handleColorClick}
+              onClick={this.handlePadClick}
             />
           ))}
           <Console

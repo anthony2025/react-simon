@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import styles from './Button.css'
+import styles from './Pad.css'
 
-import {lightenAnimation} from 'src/utils'
+import lightenAnimation from 'src/utils/lightenAnimation'
 
-export default class Button extends Component {
+export default class Pad extends Component {
   // DEFINITION
   ANIMATION_SPEED = 500
 
@@ -35,7 +35,7 @@ export default class Button extends Component {
   })
 
   // LIFECYCLE METHODS
-  componentDidMount = () => this.setState(this.subscribe)
+  componentDidMount = () => this.setState(this.subscribe, this.forceUpdate())
   componentWillUnmount = () => this.state.subscription.dispose()
 
   // BUTTON HANDLERS
