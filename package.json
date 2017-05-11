@@ -1,8 +1,8 @@
 {
-  "name": "simon-game",
+  "name": "react-simon-game",
   "version": "1.0.0",
   "description": "Simon game made in React",
-  "homepage": "https://simon-game.firebaseapp.com/",
+  "homepage": "https://react-simon-game.firebaseapp.com/",
   "private": true,
   "scripts": {
     "build": "nwb build-react-app",
@@ -28,5 +28,5 @@
   },
   "author": "Anthony Ascencio",
   "license": "CC0",
-  "repository": "https://github.com/anthony2025/simon-game"
+  "repository": "https://github.com/anthony2025/react-simon-game"
 }

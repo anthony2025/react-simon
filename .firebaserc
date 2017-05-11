@@ -1,5 +1,5 @@
 {
   "projects": {
-    "simon-game": "simon-game-aab5a"
+    "default": "react-simon-game"
   }
 }
