@@ -1,8 +1,25 @@
+@custom-media --desktop (width >= 500px), (height >= 500px);
+@custom-media --mobile (width <= 500px), (height <= 500px);
+
 :root {
-  --green: #00A74A;
+  --redishGray: #32050C;
   --red: #9F0F17;
-  --blue: #094A8F;
-  --yellow: #CCA707;
-  --borderColor: #333;
-  --whiteColor: #DDD;
+  --gray: #333;
+  --white: #DDD;
+}
+
+.screen {
+  background: var(--redishGray);
+  font-family: monospace;
+  font-size: 5vmin;
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (--desktop) {
+}
+
+@media(--mobile) {
 }

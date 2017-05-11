@@ -6,7 +6,6 @@
 }
 
 .simon {
-  border-radius: 50%;
   overflow: hidden;
 
   background-color: var(--gray);

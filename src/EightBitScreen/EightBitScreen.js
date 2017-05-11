@@ -5,9 +5,14 @@ import styles from './EightBitScreen.css'
 export default class EightBitScreen extends Component {
   // DEFINITION
   static propTypes = {
+    level: PropTypes.number,
+    smallWin: PropTypes.any,
+    bigWin: PropTypes.any,
+    error: PropTypes.any
   }
 
-  static stateTypes = {
+  state = {
+    value: 10
   }
 
   // STATE SETTERS
@@ -18,7 +23,9 @@ export default class EightBitScreen extends Component {
 
   render() {
     return (
-      <div className={styles.screen} />
+      <div className={styles.screen + ' ' + this.props.className}>
+        {this.state.value}
+      </div>
     )
   }
 }

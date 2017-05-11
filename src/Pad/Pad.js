@@ -6,6 +6,7 @@ import lightenAnimation from 'src/utils/lightenAnimation'
 
 export default class Pad extends Component {
   state = {
+    audioObject: new Audio(`audio/sound-${this.props.color}.mp3`),
   }
 
   static propTypes = {
@@ -15,12 +16,11 @@ export default class Pad extends Component {
 
   // INTERACTION METHODS
   animation = () => lightenAnimation(this.pad)
-  sound = () => new Audio(`audio/sound-${this.props.color}.mp3`).play()
+  sound = () => this.state.audioObject.play()
   light = () => {this.animation(); this.sound()}
 
   // BUTTON HANDLERS
-  handleClick = (event) => {
-    event.preventDefault()
+  handleClick = () => {
     this.animation()
     this.sound()
     this.props.onClick(this.props.color)

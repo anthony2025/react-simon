@@ -38,19 +38,36 @@
 }
 
 .item {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
   margin: 1vmin;
   text-align: center;
 }
 
-.button {
-  border: var(--gray) solid 5px;
-  border-radius: 50%;
-  box-shadow: 0 1px 5px var(--gray);
+.object {
+  border: var(--gray) solid 4px;
+  box-shadow: 0 1px 3px var(--gray);
 }
 
+
 .label {
-  margin-top: .75vmin;
+  margin-top: 1vmin;
   font-family: Helvetica;
+}
+
+.button {
+  composes: object;
+  border-radius: 50%;
+}
+
+.screenContainer {
+  composes: item;
+}
+
+.screen {
+  composes: object;
+  border-radius: 25%;
 }
 
 .reset {
@@ -70,7 +87,6 @@
     background-color: var(--yellow);
   }
 }
-
 .strictOn {
   composes: strict;
   & .button {
@@ -85,9 +101,9 @@
     border-width: 20px;
   }
   .title {
-    margin-left: 5.2vmin;
+    margin-left: 5vmin;
   }
-  .button {
+  .object {
     height: 8vmin;
     width: 8vmin;
   }
@@ -104,8 +120,9 @@
   }
   .title {
     margin-left: 10vmin;
+    margin-right: auto;
   }
-  .button {
+  .object {
     height: 10vmin;
     width: 10vmin;
   }

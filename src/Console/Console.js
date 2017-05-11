@@ -9,16 +9,18 @@ Console.propTypes = {
 }
 
 export default function Console (props) {
-  const strictClass = (props.isStrict) ? styles.strictOn : styles.strict
   return (
     <div className={styles.console}>
       <div className={styles.title}>
         Simon<sup className={styles.sup}>&reg;</sup>
       </div>
 
-      <EightBitScreen />
+      <div className={styles.screenContainer}>
+        <EightBitScreen className={styles.screen}/>
+        <div className={styles.label}>LEVEL</div>
+      </div>
 
-      <div className={strictClass}>
+      <div className={(props.isStrict) ? styles.strictOn : styles.strict}>
         <button
           className={styles.button}
           onClick={props.onStrictClick}
