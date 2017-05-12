@@ -9,7 +9,7 @@ A React version of the classic game from the 80's.
   * Flexbox and CSS Grid for layout
   * [CSS Modules][css-modules] and [PostCSS-cssnext][css-next] for locally scoped styles
   * Webpack config powered by an [nwb] boilerplate
-  * [Firebase] for free hosting
+  * [Firebase] for easy single page hosting
 
 ![Screenshot](/assets/screenshot.png?raw=true)
 
