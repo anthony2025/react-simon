@@ -1,4 +1,4 @@
-A React version of the classic game from the 80's. Built as part of the FreeCodeCamp curricula.
+A React version of the classic game from the 80's.
 
 ## Live at
 [react-simon-game.firebaseapp.com](https://react-simon-game.firebaseapp.com)
