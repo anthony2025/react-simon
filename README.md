@@ -11,7 +11,7 @@ A React version of the classic game from the 80's.
   * Webpack config powered by an [nwb] boilerplate
   * [Firebase] for easy single page hosting
 
-![Screenshot](/assets/screenshot.png?raw=true)
+![Screenshot](/public/screenshot.jpg?raw=true)
 
 ## Future
   * Rewrite in [Redux] ongoing in 'redux' branch
