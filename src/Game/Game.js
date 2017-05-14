@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import styles from './Simon.css';
 
 import Rx from 'rxjs/Rx'
 import getRandomArray from 'src/utils/getRandomArray'
@@ -7,42 +6,50 @@ import isArrayIncluded from 'src/utils/isArrayIncluded'
 import {
   SEQUENCE_SPEED,
   COLORS,
-  MAX_LEVEL
+  MAX_LEVEL,
 } from 'src/utils/constants'
 
-import Pad from 'src/Pad'
-import Console from 'src/Console'
-import GithubCorner from 'src/GithubCorner'
+import Board from 'src/Board'
 
-export default class Simon extends Component {
+export default class Game extends Component {
   state = {
-    sequence: getRandomArray(COLORS, MAX_LEVEL),
-    played: [],
-    currentLevel: 1, // should be 1 in production
-    strict: false
+    solutionSequence: getRandomArray(COLORS, MAX_LEVEL),
+    padsPlayed: [],
+    currentLevel: 1,
+    strictMode: false,
+    observable: null
   }
 
-  // STATE SETTERS
-  resetGame = (state, props) => ({
-    sequence: getRandomArray(COLORS, MAX_LEVEL),
-    played: [],
+  resetGame = () => ({
+    solutionSequence: getRandomArray(COLORS, MAX_LEVEL),
+    padsPlayed: [],
     currentLevel: 1
   })
-  nextLevel = (state, props) => ({
-    played: [],
+  nextLevel = (state) => ({
+    padsPlayed: [],
     currentLevel: state.currentLevel + 1
   })
-  redoLevel = (state, props) => ({
-    played: []
+  redoLevel = () => ({
+    padsPlayed: []
+  })
+  toggleStrict = (state) => ({
+    strictMode: !state.strictMode
+  })
+  playPad = (color) => (state) => ({
+    padsPlayed: [...state.padsPlayed, color]
+  })
+  createObservable = (state) => ({
+    observable: Rx.Observable
+      .interval(SEQUENCE_SPEED)
+      .take(state.currentLevel)
+      .map(i => state.solutionSequence[i])
   })
 
-  // STATE GETTERS
   isLastLevel = () => this.state.currentLevel >= MAX_LEVEL
-  hasLevelEnded = () => this.state.played.length === this.state.currentLevel
-  hasPlayerMadeMistake = () => !isArrayIncluded(this.state.played, this.state.sequence)
-  isStrictModeOn = () => this.state.strict
+  hasLevelEnded = () => this.state.padsPlayed.length === this.state.currentLevel
+  hasPlayerMadeMistake = () => !isArrayIncluded(this.state.padsPlayed, this.state.solutionSequence)
+  isStrictModeOn = () => this.state.strictMode
 
-  // GAME LOGIC
   checkGameState = () => {
     if (this.hasPlayerMadeMistake()) {
       if (this.isStrictModeOn()) {
@@ -50,6 +57,7 @@ export default class Simon extends Component {
       }
       else {
         this.setState(this.redoLevel)
+        console.log('resetting level')
       }
       return this.setState(this.createObservable)
     }
@@ -64,58 +72,30 @@ export default class Simon extends Component {
     }
   }
 
-  // OBSERVABLE
-  createObservable = (state, props) => ({
-    observable: Rx.Observable
-      .interval(SEQUENCE_SPEED)
-      .take(state.currentLevel)
-      .map(i => state.sequence[i])
-      .subscribe((color) => this[color].light())
-    })
-
-  // LIFECYCLE METHODS
-  componentDidMount = () => {
-      this.setState(this.createObservable)
-  }
-  componentDidUpdate = () => this.checkGameState()
-
-  // BUTTON HANDLERS
   handlePadClick = (color) => {
-    this.setState((state) => ({played: [...state.played, color]}))
+    this.setState(this.playPad(color),
+    this.checkGameState)
   }
   handleStrictClick = () => {
-    this.setState((state) => ({strict: !state.strict}))
+    this.setState(this.toggleStrict)
   }
   handleResetClick = () => {
     this.setState(this.resetGame)
   }
 
+  componentDidMount = () => {
+    this.setState(this.createObservable)
+  }
+
   render () {
     return (
-      <div className={styles.app}>
-        <GithubCorner
-          repository='https://github.com/anthony2025/simon-game'
-          bgColor='white'
-          mainColor='#9F0F17'
-        />
-
-        <div className={styles.simon}>
-          {COLORS.map((color) => (
-            <Pad
-              key={color}
-              color={color}
-              ref={pad => this[color] = pad} // should be removed in production
-              onClick={this.handlePadClick}
-            />
-          ))}
-          <Console
-            isStrict={this.state.strict}
-            onStrictClick={this.handleStrictClick}
-            onResetClick={this.handleResetClick}
-          />
-        </div>
-      </div>
-
+      <Board
+        strictMode={this.state.strictMode}
+        onStrictClick={this.handleStrictClick}
+        onResetClick={this.handleResetClick}
+        onPadClick={this.handlePadClick}
+        observable={this.state.observable}
+      />
     )
   }
 }

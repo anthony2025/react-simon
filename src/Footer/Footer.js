@@ -1,18 +1,16 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styles from './Footer.css'
 
-Footer.propTypes = {
-  className: PropTypes.string
-}
+import {REPOSITORY} from 'src/utils/constants'
 
-const link = 'https://github.com/anthony2025/react-simon-game'
-
-export default function Footer ({className}) {
+export default function Footer () {
   return (
-    <div className={styles.footer + ' ' + className}>
-      <a href={link} className={styles.text}>
-        made with ♥ by Anthony Ascencio
+    <div className={styles.footer}>
+      <a
+        href={REPOSITORY}
+        className={styles.text}
+      >
+        made with ♥ by Anthony
       </a>
     </div>
   )

@@ -1,9 +1,9 @@
 // OBSERVABLE
-createObservable = (state, props) => ({
+createObservable = (state) => ({
   observable: Rx.Observable
     .interval(SEQUENCE_SPEED)
     .take(state.currentLevel)
-    .map(i => state.sequence[i])
+    .map(i => state.solutionSequence[i])
     .subscribe((color) => null) // light pad method goes here
   })
 

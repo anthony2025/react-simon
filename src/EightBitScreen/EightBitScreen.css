@@ -9,6 +9,7 @@
 }
 
 .screen {
+  composes: object from 'src/Console/Console.css';
   background: var(--redishGray);
   font-family: monospace;
   font-size: 5vmin;
@@ -16,10 +17,5 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-@media (--desktop) {
-}
-
-@media(--mobile) {
+  border-radius: 25%;
 }

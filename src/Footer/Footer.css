@@ -8,9 +8,10 @@
 .text {
   font-family: Helvetica;
   font-size: 2vh;
+  color: #333;
 }
 
 .text:hover {
-  font-weight: 300;
-  transition: .5s;
+  transition: 1s;
+  color: #CCC;
 }

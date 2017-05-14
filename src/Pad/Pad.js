@@ -5,25 +5,33 @@ import styles from './Pad.css'
 import lightenAnimation from 'src/utils/lightenAnimation'
 
 export default class Pad extends Component {
-  state = {
-    audioObject: new Audio(`audio/sound-${this.props.color}.mp3`),
-  }
-
   static propTypes = {
     color: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
+    observable: PropTypes.object
   }
 
-  // INTERACTION METHODS
-  animation = () => lightenAnimation(this.pad)
-  sound = () => this.state.audioObject.play()
-  light = () => {this.animation(); this.sound()}
+  constructor (props) {
+    super(props)
+    this.audioObject = new Audio(`audio/sound-${this.props.color}.mp3`)
+    this.pad // reference to the DOM element
+  }
 
-  // BUTTON HANDLERS
+  light = () => lightenAnimation(this.pad)
+  sound = () => this.audioObject.play()
+  animate = () => {this.light(); this.sound()} // light + sound
+
   handleClick = () => {
-    this.animation()
-    this.sound()
+    this.animate()
     this.props.onClick(this.props.color)
+  }
+
+  componentDidUpdate = () => {
+    if (this.props.observable) {
+      this.props.observable.subscribe((color) => {
+        if (color === this.props.color) this.animate()
+      })
+    }
   }
 
   render() {

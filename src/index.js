@@ -2,9 +2,9 @@ import React from 'react'
 import {render} from 'react-dom'
 import './index.css'
 
-import Simon from 'src/Simon'
+import App from 'src/App'
 
 render(
-  <Simon />,
-  document.querySelector('#root')
+  <App />,
+  document.querySelector('#app')
 )
