@@ -7,19 +7,20 @@ import isArrayIncluded from 'src/utils/isArrayIncluded'
 import {
   SEQUENCE_SPEED,
   COLORS,
-  MAX_LEVEL
+  MAX_LEVEL,
+  REPOSITORY
 } from 'src/utils/constants'
 
-import Pad from 'src/Pad'
-import Console from 'src/Console'
 import GithubCorner from 'src/GithubCorner'
+import Board from 'src/Board'
+// import Footer from 'src/Footer'
 
 export default class Simon extends Component {
   state = {
-    sequence: getRandomArray(COLORS, MAX_LEVEL),
-    played: [],
+    solutionSequence: getRandomArray(COLORS, MAX_LEVEL),
+    padsPlayed: [],
     currentLevel: 1, // should be 1 in production
-    strict: false
+    strictMode: false
   }
 
   // STATE SETTERS
@@ -64,19 +65,7 @@ export default class Simon extends Component {
     }
   }
 
-  // OBSERVABLE
-  createObservable = (state, props) => ({
-    observable: Rx.Observable
-      .interval(SEQUENCE_SPEED)
-      .take(state.currentLevel)
-      .map(i => state.sequence[i])
-      .subscribe((color) => this[color].light())
-    })
-
   // LIFECYCLE METHODS
-  componentDidMount = () => {
-      this.setState(this.createObservable)
-  }
   componentDidUpdate = () => this.checkGameState()
 
   // BUTTON HANDLERS
@@ -94,28 +83,18 @@ export default class Simon extends Component {
     return (
       <div className={styles.app}>
         <GithubCorner
-          repository='https://github.com/anthony2025/simon-game'
+          repository={REPOSITORY}
           bgColor='white'
           mainColor='#9F0F17'
         />
-
-        <div className={styles.simon}>
-          {COLORS.map((color) => (
-            <Pad
-              key={color}
-              color={color}
-              ref={pad => this[color] = pad} // should be removed in production
-              onClick={this.handlePadClick}
-            />
-          ))}
-          <Console
-            isStrict={this.state.strict}
-            onStrictClick={this.handleStrictClick}
-            onResetClick={this.handleResetClick}
-          />
-        </div>
+        <Board
+          strictMode={this.state.strictMode}
+          onPadClick={this.handlePadClick}
+          onStrictClick={this.handleStrictClick}
+          onResetClick={this.handleResetClick}
+        />
+        {/*<Footer />*/}
       </div>
-
     )
   }
 }

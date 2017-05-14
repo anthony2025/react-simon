@@ -1,0 +1,11 @@
+// OBSERVABLE
+createObservable = (state, props) => ({
+  observable: Rx.Observable
+    .interval(SEQUENCE_SPEED)
+    .take(state.currentLevel)
+    .map(i => state.sequence[i])
+    .subscribe((color) => null) // light pad method goes here
+  })
+
+// LIFECYCLE METHODS
+componentDidMount = () => this.setState(this.createObservable)
