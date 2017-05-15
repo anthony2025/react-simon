@@ -1,16 +1,44 @@
 import getRandomArray from 'src/utils/getRandomArray'
-import isArrayIncluded from 'src/utils/isArrayIncluded'
-import {COLORS, MAX_LEVEL} from 'src/utils/constants'
+import getNewObservable from 'src/utils/getNewObservable'
+import {COLORS, MAX_LEVEL, SEQUENCE_SPEED} from 'src/utils/constants'
 
-const initialState = {
-  solutionSequence: getRandomArray(COLORS, MAX_LEVEL),
+// STATE SETTERS
+const initialState = () => {
+  const sequence = getRandomArray(COLORS, MAX_LEVEL)
+  const observable = getNewObservable(sequence, 1, SEQUENCE_SPEED)
+  return {
+    sequence: sequence,
+    padsPlayed: [],
+    currentLevel: 1,
+    strictMode: false,
+    observable: observable
+  }
+}
+const addPad = (state, action) => ({
+  ...state,
+  padsPlayed: [...state.padsPlayed, action.color]
+})
+const redoLevel = (state) => ({
+  ...state,
+  padsPlayed: [],
+  observable: getNewObservable(state.sequence, state.currentLevel, SEQUENCE_SPEED)
+})
+const resetGame = (state) => ({
+  ...state,
+  sequence: getRandomArray(COLORS, MAX_LEVEL),
   padsPlayed: [],
   currentLevel: 1,
-  strictMode: false,
-  observable: {}
-}
+  observable: getNewObservable(state.sequence, state.currentLevel, SEQUENCE_SPEED)
+})
+const incrementLevel = (state) => ({
+  ...state,
+  padsPlayed: [],
+  currentLevel: state.currentLevel + 1,
+  observable: getNewObservable(state.sequence, state.currentLevel + 1, SEQUENCE_SPEED)
+})
 
-const reducer = (state = initialState, action) => {
+// REDUCERS
+const mainReducer = (state = initialState(), action) => {
   switch (action.type) {
     case 'TOGGLE_STRICT':
       return {
@@ -19,68 +47,40 @@ const reducer = (state = initialState, action) => {
       }
     case 'RESET_GAME':
       return {
-        ...initialState,
+        ...initialState(),
         strictMode: state.strictMode,
       }
-    case 'ADD_PAD':
-      return {
-        ...state,
-        padsPlayed: pads(state, action)
-      }
+    case 'PLAY_PAD':
+      return gameLogic(state, action)
     default:
       return state
   }
 }
 
-const isLastLevel = (state) => state.currentLevel >= MAX_LEVEL
-const hasLevelEnded = (state) => state.padsPlayed.length === state.currentLevel
-const hasPlayerMadeMistake = (state) => !isArrayIncluded(state.padsPlayed, state.solutionSequence)
-const isStrictModeOn = (state) => state.strictMode
+const gameLogic = (state = [], action) => {
+  const isWrongAnswer = action.color !== state.sequence[state.padsPlayed.length]
+  const hasLevelEnded = state.padsPlayed.length + 1 >= state.currentLevel
+  const hasGameEnded = state.currentLevel >= MAX_LEVEL
+  const isStrictMode = state.strictMode
 
-const pads = (state = [], action) => {
-  switch (action.type) {
-    case 'ADD_PAD': //action.pad ?
-      if (hasPlayerMadeMistake(state)) {
-        if (isStrictModeOn(state)) {
-          return {
-            ...initialState,
-            strictMode: state.strictMode
-          }
-        }
-        else {
-          return {
-            ...state,
-            padsPlayed: []
-          }
-        }
-        // Observable
-      }
-      if (hasLevelEnded(state)) {
-        if (isLastLevel(state)) {
-          return {
-            ...initialState,
-            strictMode: state.strictMode
-          }
-        }
-        else {
-          return {
-            ...state,
-            padsPlayed: [],
-            currentLevel: state.currentLevel + 1
-          }
-        }
-        // return {
-        //   ...state,
-        //   observable: Rx.Observable
-        //     .interval(SEQUENCE_SPEED)
-        //     .take(state.currentLevel)
-        //     .map(i => state.solutionSequence[i])
-        // }
-      }
+  if (isWrongAnswer) {
+    if (isStrictMode) {
+      return resetGame(state)
     }
+    return redoLevel(state)
   }
+  if (hasLevelEnded) {
+    if (hasGameEnded) {
+      return resetGame(state)
+    }
+    return incrementLevel(state)
+  }
+  return addPad(state, action)
+}
 
-export default reducer
-export const toggleStrict = () => ({type: 'TOGGLE_STRICT'})
-export const resetGame = () => ({type: 'RESET_GAME'})
-export const playPad = () => ({type: 'ADD_PAD'})
+export default mainReducer
+
+// ACTIONS
+export const handleStrictClick = () => ({type: 'TOGGLE_STRICT'})
+export const handleResetClick = () => ({type: 'RESET_GAME'})
+export const handlePadClick = (color) => ({type: 'PLAY_PAD', color: color})

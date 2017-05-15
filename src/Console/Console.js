@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styles from './Console.css'
 
 import {connect} from 'react-redux'
-import {toggleStrict, resetGame} from 'src/utils/redux'
+import {handleStrictClick, handleResetClick} from 'src/utils/redux'
 
 import EightBitScreen from 'src/EightBitScreen'
 
@@ -17,8 +17,8 @@ const mapStateToProps = (state) => ({
   strictMode: state.strictMode
 })
 const mapDispatchToProps = (dispatch) => ({
-  onStrictClick: () => dispatch(toggleStrict()),
-  onResetClick: () => dispatch(resetGame())
+  onStrictClick: () => dispatch(handleStrictClick()),
+  onResetClick: () => dispatch(handleResetClick())
 })
 
 function Console (props) {
