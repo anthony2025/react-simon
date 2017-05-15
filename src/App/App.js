@@ -4,7 +4,7 @@ import styles from './App.css';
 import {REPOSITORY} from 'src/utils/constants'
 
 import GithubCorner from 'src/GithubCorner'
-import Game from 'src/Game'
+import Board from 'src/Board'
 import Footer from 'src/Footer'
 
 export default function App () {
@@ -15,7 +15,7 @@ export default function App () {
         bgColor='white'
         mainColor='#9F0F17'
       />
-      <Game />
+      <Board />
       <Footer />
     </div>
   )
