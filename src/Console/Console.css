@@ -1,6 +1,3 @@
-@custom-media --desktop (width >= 500px), (height >= 500px);
-@custom-media --mobile (width <= 500px), (height <= 500px);
-
 :root {
   --red: #9F0F17;
   --yellow: #CCA707;
@@ -33,9 +30,10 @@
   font-family: Tahoma, sans-serif;
   letter-spacing: -.5vmin;
   font-weight: bolder;
-  & .sup {
-    font-size: 5vmin;
-  }
+}
+
+.sup {
+  font-size: 5vmin;
 }
 
 .item {
@@ -68,29 +66,33 @@
 
 .reset {
   composes: item;
-  & .button {
-    background-color: var(--red);
-  }
-  & .button:active {
-    transition: .05s;
-    filter: brightness(1.5)
-  }
+}
+
+.button {
+  background-color: var(--red);
+}
+
+.button:active {
+  transition: .05s;
+  filter: brightness(1.5)
 }
 
 .strict {
   composes: item;
-  & .button {
-    background-color: var(--yellow);
-  }
 }
-.strictOn {
-  composes: strict;
-  & .button {
-    filter: brightness(1.5)
-  }
+.button {
+  background-color: var(--yellow);
 }
 
-@media (--desktop) {
+.strictOn {
+  composes: strict;
+}
+
+.button {
+  filter: brightness(1.5)
+}
+
+@media (min-width: 500px), (min-height: 500px) {
   .console {
     height: 45vmin;
     width: 45vmin;
@@ -108,7 +110,7 @@
   }
 }
 
-@media(--mobile) {
+@media (max-width: 500px), (max-height: 500px) {
   .console {
     height: 55vmin;
     width: 55vmin;

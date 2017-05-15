@@ -4,18 +4,19 @@ A React version of the classic game from the 80's.
 [react-simon-game.firebaseapp.com](https://react-simon-game.firebaseapp.com)
 
 ## Technologies
-  * Built in [React] and ES6
+  * Built in [React] using ES6+ syntax
   * RxJS's Observables and the future [Web Animations API][web-animations-api], with a [polyfill][animations-polyfill]
+  * Redux store for managing the game logic
+  * [CSS Modules][css-modules] and native CSS Variables for locally scoped styles
   * Flexbox and CSS Grid for layout
-  * [CSS Modules][css-modules] and [PostCSS-cssnext][css-next] for locally scoped styles
   * Webpack config powered by an [nwb] boilerplate
   * [Firebase] for easy single page hosting
 
 ![Screenshot](/public/screenshot.png?raw=true)
 
 ## Future
-  * Rewrite in [Redux] ongoing in 'redux' branch
-  * [MobX] implementation planned
+  * Unit and snapshot testing
+  * implementation in [MobX] planned
 
 ## Prerequisites
 [Node] >= 6.x.x must be installed.
@@ -39,6 +40,5 @@ A React version of the classic game from the 80's.
 [nwb]: https://github.com/insin/nwb
 [firebase]: https://firebase.google.com/docs/reference/rest/database/
 [css-modules]: https://github.com/css-modules/css-modules
-[css-next]: http://cssnext.io/
 [node]: http://nodejs.org/
 [yarn]: http://yarnpkg.com/

@@ -26,7 +26,6 @@
     "directory-named-webpack-plugin": "^2.1.0",
     "firebase-tools": "^3.6.1",
     "nwb": "^0.15.8",
-    "postcss-cssnext": "^2.10.0",
     "snazzy": "^7.0.0",
     "standard": "^10.0.2"
   },
