@@ -1,17 +1,3 @@
-// OBSERVABLE
-createObservable = (state) => ({
-  observable: Rx.Observable
-    .interval(SEQUENCE_SPEED)
-    .take(state.currentLevel)
-    .map(i => state.solutionSequence[i])
-    .subscribe((color) => null) // light pad method goes here
-  })
-
-// LIFECYCLE METHODS
-componentDidMount = () => this.setState(this.createObservable)
-
-//STORE
-
 import getRandomArray from 'src/utils/getRandomArray'
 import isArrayIncluded from 'src/utils/isArrayIncluded'
 import {
@@ -48,6 +34,11 @@ const reducer = (state = initialState, action) => {
   }
 }
 
+const isLastLevel = (state) => state.currentLevel >= MAX_LEVEL
+const hasLevelEnded = (state) => state.padsPlayed.length === state.currentLevel
+const hasPlayerMadeMistake = (state) => !isArrayIncluded(state.padsPlayed, state.solutionSequence)
+const isStrictModeOn = (state) => state.strictMode
+
 const pads = (state = [], action) => {
   switch (action.type) {
     case 'ADD_PAD': //action.pad ?
@@ -80,7 +71,13 @@ const pads = (state = [], action) => {
             currentLevel: state.currentLevel + 1
           }
         }
-        // Observable
+        // return {
+        //   ...state,
+        //   observable: Rx.Observable
+        //     .interval(SEQUENCE_SPEED)
+        //     .take(state.currentLevel)
+        //     .map(i => state.solutionSequence[i])
+        // }
       }
     }
   }
@@ -90,24 +87,3 @@ export default reducer
 export const toggleStrict = () => ({type: 'TOGGLE_STRICT'})
 export const resetGame = () => ({type: 'RESET_GAME'})
 export const playPad = () => ({type: 'ADD_PAD'})
-
-const isLastLevel = (state) => state.currentLevel >= MAX_LEVEL
-const hasLevelEnded = (state) => state.padsPlayed.length === state.currentLevel
-const hasPlayerMadeMistake = (state) => !isArrayIncluded(state.padsPlayed, state.solutionSequence)
-const isStrictModeOn = (state) => state.strictMode
-
-//INDEX.JS
-import React from 'react'
-import {render} from 'react-dom'
-
-import {createStore} from 'redux'
-import reducer from 'src/redux/reducer.js'
-
-import {Provider} from 'react-redux'
-import App from 'src/App'
-
-render(
-  <Provider store={createStore(reducer)}>
-    <App />
-  </Provider>,
-  document.querySelector('#root')
