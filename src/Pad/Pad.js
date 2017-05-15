@@ -2,9 +2,19 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import styles from './Pad.css'
 
+import {connect} from 'react-redux'
+import {playPad} from 'src/utils/redux'
+
 import lightenAnimation from 'src/utils/lightenAnimation'
 
-export default class Pad extends Component {
+const mapStateToProps = (state) => ({
+  observable: state.observable
+})
+const mapDispatchToProps = (dispatch) => ({
+  onClick: () => dispatch(playPad()),
+})
+
+class Pad extends Component {
   static propTypes = {
     color: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
@@ -44,3 +54,8 @@ export default class Pad extends Component {
     )
   }
 }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Pad)

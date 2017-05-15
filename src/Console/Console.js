@@ -2,6 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './Console.css'
 
+import {connect} from 'react-redux'
+import {toggleStrict, resetGame} from 'src/utils/redux'
+
 import EightBitScreen from 'src/EightBitScreen'
 
 Console.propTypes = {
@@ -9,7 +12,16 @@ Console.propTypes = {
   onStrictClick: PropTypes.func.isRequired,
   onResetClick: PropTypes.func.isRequired
 }
-export default function Console (props) {
+
+const mapStateToProps = (state) => ({
+  strictMode: state.strictMode
+})
+const mapDispatchToProps = (dispatch) => ({
+  onStrictClick: () => dispatch(toggleStrict()),
+  onResetClick: () => dispatch(resetGame())
+})
+
+function Console (props) {
   return (
     <div className={styles.console}>
       <div className={styles.title}>
@@ -39,3 +51,8 @@ export default function Console (props) {
     </div>
   )
 }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Console)

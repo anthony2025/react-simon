@@ -1,15 +1,13 @@
 import getRandomArray from 'src/utils/getRandomArray'
 import isArrayIncluded from 'src/utils/isArrayIncluded'
-import {
-  COLORS,
-  MAX_LEVEL
-} from 'src/utils/constants'
+import {COLORS, MAX_LEVEL} from 'src/utils/constants'
 
 const initialState = {
   solutionSequence: getRandomArray(COLORS, MAX_LEVEL),
   padsPlayed: [],
   currentLevel: 1,
-  strictMode: false
+  strictMode: false,
+  observable: {}
 }
 
 const reducer = (state = initialState, action) => {
@@ -17,7 +15,7 @@ const reducer = (state = initialState, action) => {
     case 'TOGGLE_STRICT':
       return {
         ...state,
-        strict: !state.strict
+        strictMode: !state.strictMode
       }
     case 'RESET_GAME':
       return {
@@ -83,7 +81,6 @@ const pads = (state = [], action) => {
   }
 
 export default reducer
-
 export const toggleStrict = () => ({type: 'TOGGLE_STRICT'})
 export const resetGame = () => ({type: 'RESET_GAME'})
 export const playPad = () => ({type: 'ADD_PAD'})

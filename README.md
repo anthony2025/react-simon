@@ -4,7 +4,7 @@ A React version of the classic game from the 80's.
 [react-simon-game.firebaseapp.com](https://react-simon-game.firebaseapp.com)
 
 ## Technologies
-  * Built in [React] 15.6
+  * Built in [React] and ES6
   * RxJS's Observables and the future [Web Animations API][web-animations-api], with a [polyfill][animations-polyfill]
   * Flexbox and CSS Grid for layout
   * [CSS Modules][css-modules] and [PostCSS-cssnext][css-next] for locally scoped styles
