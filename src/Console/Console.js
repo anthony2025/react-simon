@@ -5,7 +5,7 @@ import styles from './Console.css'
 import {connect} from 'react-redux'
 import {handleStrictClick, handleResetClick} from 'src/utils/redux'
 
-import EightBitScreen from 'src/EightBitScreen'
+import EightBitScreen from 'src/EightBitScreen/EightBitScreen'
 
 Console.propTypes = {
   strictMode: PropTypes.bool.isRequired,
