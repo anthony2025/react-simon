@@ -31,12 +31,13 @@
   letter-spacing: -.5vmin;
   font-weight: bolder;
 }
-
 .sup {
   font-size: 5vmin;
 }
 
-.item {
+.screenContainer,
+.strictContainer,
+.resetContainer {
   display: flex;
   justify-content: flex-end;
   flex-direction: column;
@@ -44,52 +45,34 @@
   text-align: center;
 }
 
-.object {
+.screen,
+.strictButton,
+.resetButton {
   border: var(--gray) solid 4px;
   box-shadow: 0 1px 3px var(--gray);
 }
 
+.resetButton {
+  border-radius: 50%;
+  background-color: var(--red);
+}
+.strictButton {
+  border-radius: 50%;
+  background-color: var(--yellow);
+}
+
+.resetButton:active {
+  transition: .05s;
+  filter: brightness(1.5);
+}
+.strictButtonOn {
+  composes: strictButton;
+  filter: brightness(1.5);
+}
 
 .label {
   margin-top: 1vmin;
   font-family: Helvetica;
-}
-
-.button {
-  composes: object;
-  border-radius: 50%;
-}
-
-.screenContainer {
-  composes: item;
-}
-
-.reset {
-  composes: item;
-}
-
-.button {
-  background-color: var(--red);
-}
-
-.button:active {
-  transition: .05s;
-  filter: brightness(1.5)
-}
-
-.strict {
-  composes: item;
-}
-.button {
-  background-color: var(--yellow);
-}
-
-.strictOn {
-  composes: strict;
-}
-
-.button {
-  filter: brightness(1.5)
 }
 
 @media (min-width: 500px), (min-height: 500px) {
@@ -101,7 +84,9 @@
   .title {
     margin-left: 5vmin;
   }
-  .object {
+  .screen,
+  .strictButton,
+  .resetButton  {
     height: 8vmin;
     width: 8vmin;
   }
@@ -120,7 +105,9 @@
     margin-left: 10vmin;
     margin-right: auto;
   }
-  .object {
+  .screen,
+  .strictButton,
+  .resetButton  {
     height: 10vmin;
     width: 10vmin;
   }

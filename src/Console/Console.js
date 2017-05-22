@@ -33,17 +33,17 @@ function Console (props) {
         <div className={styles.label}>LEVEL</div>
       </div>
 
-      <div className={(props.strictMode) ? styles.strictOn : styles.strict}>
+      <div className={styles.strictContainer}>
         <button
-          className={styles.button}
+          className={(props.strictMode) ? styles.strictButtonOn : styles.strictButton}
           onClick={props.onStrictClick}
         />
         <div className={styles.label}>STRICT</div>
       </div>
 
-      <div className={styles.reset}>
+      <div className={styles.resetContainer}>
         <button
-          className={styles.button}
+          className={styles.resetButton}
           onClick={props.onResetClick}
         />
         <div className={styles.label}>RESET</div>

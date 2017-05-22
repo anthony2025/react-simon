@@ -6,13 +6,16 @@
 }
 
 .screen {
-  composes: object from 'src/Console/Console.css';
+  composes: screen from 'src/Console/Console.css';
+
   background: var(--redishGray);
+  color: var(--red);
+  border-radius: 25%;
+
   font-family: monospace;
   font-size: 5vmin;
-  color: var(--red);
+
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 25%;
 }

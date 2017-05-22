@@ -5,8 +5,8 @@ A React version of the classic game from the 80's.
 
 ## Technologies
   * Built in [React] using ES6+ syntax
-  * RxJS's Observables and the future [Web Animations API][web-animations-api], with a [polyfill][animations-polyfill]
   * Redux store for managing the game logic
+  * RxJS's Observables and the future [Web Animations API][web-animations-api], with a [polyfill][animations-polyfill]
   * [CSS Modules][css-modules] and native CSS Variables for locally scoped styles
   * Flexbox and CSS Grid for layout
   * Webpack config powered by an [nwb] boilerplate
@@ -16,7 +16,6 @@ A React version of the classic game from the 80's.
 
 ## Future
   * Unit and snapshot testing
-  * implementation in [MobX] planned
 
 ## Prerequisites
 [Node] >= 6.x.x must be installed.
