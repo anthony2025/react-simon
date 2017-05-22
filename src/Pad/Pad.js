@@ -19,7 +19,7 @@ class Pad extends Component {
   static propTypes = {
     color: PropTypes.string.isRequired,
     onPadClick: PropTypes.func.isRequired,
-    observable: PropTypes.object
+    observable: PropTypes.object.isRequired
   }
 
   constructor (props) {
@@ -33,25 +33,18 @@ class Pad extends Component {
   animate = () => {this.light(); this.sound()} // light + sound
 
   handlePadClick = () => {
-    this.light()
+    this.animate()
     this.props.onPadClick(this.props.color)
   }
 
-  componentDidMount () {
-    if (this.props.observable) {
-      this.props.observable.subscribe((color) => {
-        if (color === this.props.color) this.animate()
-      })
-    }
+  refreshObservable = () => {
+    this.props.observable.subscribe((color) => {
+      if (color === this.props.color) this.light()
+    })
   }
 
-  componentDidUpdate () {
-    if (this.props.observable) {
-      this.props.observable.subscribe((color) => {
-        if (color === this.props.color) this.animate()
-      })
-    }
-  }
+  componentDidMount () {this.refreshObservable()}
+  componentDidUpdate () {this.refreshObservable()}
 
   render() {
     return (
