@@ -11,13 +11,6 @@ module.exports = {
         modules: true,
         localIdentName: '[local]--[hash:base64:5]'
       }
-    },
-    extra: {
-      resolve: {
-        plugins: [
-          new require('directory-named-webpack-plugin')()
-        ]
-      }
     }
   }
 }

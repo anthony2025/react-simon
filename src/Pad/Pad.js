@@ -11,14 +11,14 @@ import lightenAnimation from 'src/utils/lightenAnimation'
 const mapStateToProps = (state) => ({
   observable: state.observable
 })
-const mapDispatchToProps = (dispatch) => ({
-  onClick: (color) => dispatch(handlePadClick(color)),
-})
+const mapDispatchToProps = {
+  onPadClick: handlePadClick,
+}
 
 class Pad extends Component {
   static propTypes = {
     color: PropTypes.string.isRequired,
-    onClick: PropTypes.func.isRequired,
+    onPadClick: PropTypes.func.isRequired,
     observable: PropTypes.object
   }
 
@@ -32,9 +32,9 @@ class Pad extends Component {
   sound = () => this.audioObject.play()
   animate = () => {this.light(); this.sound()} // light + sound
 
-  handleClick = () => {
-    this.animate()
-    this.props.onClick(this.props.color)
+  handlePadClick = () => {
+    this.light()
+    this.props.onPadClick(this.props.color)
   }
 
   componentDidMount = () => {
@@ -58,7 +58,7 @@ class Pad extends Component {
       <button
         className={styles[this.props.color]}
         ref={pad => this.pad = pad}
-        onClick={this.handleClick}
+        onClick={this.handlePadClick}
       />
     )
   }
