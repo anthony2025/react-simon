@@ -37,7 +37,7 @@ class Pad extends Component {
     this.props.onPadClick(this.props.color)
   }
 
-  componentDidMount = () => {
+  componentDidMount () {
     if (this.props.observable) {
       this.props.observable.subscribe((color) => {
         if (color === this.props.color) this.animate()
@@ -45,7 +45,7 @@ class Pad extends Component {
     }
   }
 
-  componentDidUpdate = () => {
+  componentDidUpdate () {
     if (this.props.observable) {
       this.props.observable.subscribe((color) => {
         if (color === this.props.color) this.animate()

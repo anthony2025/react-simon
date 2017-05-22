@@ -8,11 +8,11 @@ const REDO_LEVEL = 'REDO_LEVEL'
 const RESET_GAME = 'RESET_GAME'
 const INCREMENT_LEVEL = 'INCREMENT_LEVEL'
 
-const addPad = (color) => ({type: 'ADD_PAD', color: color})
-const toggleStrict = () => ({type: 'TOGGLE_STRICT'})
-const redoLevel = () => ({type: 'REDO_LEVEL'})
-const resetGame = () => ({type: 'RESET_GAME'})
-const incrementLevel = () => ({type: 'INCREMENT_LEVEL'})
+const addPad = (color) => ({type: ADD_PAD, color: color})
+const toggleStrict = () => ({type: TOGGLE_STRICT})
+const redoLevel = () => ({type: REDO_LEVEL})
+const resetGame = () => ({type: RESET_GAME})
+const incrementLevel = () => ({type: INCREMENT_LEVEL})
 
 const initialState = () => {
   let sequence = getRandomArray(COLORS, MAX_LEVEL)
@@ -75,10 +75,9 @@ export const handlePadClick = (color) => (dispatch, getState) => {
   const isWrongAnswer = color !== sequence[padsPlayed.length]
   const hasLevelEnded = padsPlayed.length + 1 >= currentLevel
   const hasGameEnded = currentLevel >= MAX_LEVEL
-  const isStrictMode = strictMode
 
   if (isWrongAnswer) {
-    if (isStrictMode) {
+    if (strictMode) {
       return dispatch(resetGame())
     }
     return dispatch(redoLevel())
