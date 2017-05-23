@@ -62,7 +62,7 @@
 }
 
 .resetButton:active {
-  transition: .05s;
+  transition: 0;
   filter: brightness(1.5);
 }
 .strictButtonOn {
@@ -75,6 +75,7 @@
   font-family: Helvetica;
 }
 
+/* DESKTOP */
 @media (min-width: 500px), (min-height: 500px) {
   .console {
     height: 45vmin;
@@ -95,6 +96,7 @@
   }
 }
 
+/* MOBILE */
 @media (max-width: 500px), (max-height: 500px) {
   .console {
     height: 55vmin;

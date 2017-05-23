@@ -6,8 +6,7 @@
 }
 
 .screen {
-  composes: screen from 'src/Console/Console.css';
-
+  composes: screen from '../Console/Console.css';
   background: var(--redishGray);
   color: var(--red);
   border-radius: 25%;

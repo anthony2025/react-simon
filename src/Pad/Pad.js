@@ -32,15 +32,15 @@ class Pad extends Component {
   sound = () => this.audioObject.play()
   animate = () => {this.light(); this.sound()} // light + sound
 
-  handlePadClick = () => {
-    this.animate()
-    this.props.onPadClick(this.props.color)
-  }
-
   refreshObservable = () => {
     this.props.observable.subscribe((color) => {
       if (color === this.props.color) this.light()
     })
+  }
+
+  handlePadClick = () => {
+    this.animate()
+    this.props.onPadClick(this.props.color)
   }
 
   componentDidMount () {this.refreshObservable()}

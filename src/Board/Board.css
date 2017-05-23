@@ -18,6 +18,7 @@
                         "yellow blue";
 }
 
+/* DESKTOP */
 @media (min-width: 500px), (min-height: 500px) {
   .board {
     border-width: 25px;
@@ -28,6 +29,7 @@
   }
 }
 
+/* MOBILE */
 @media (max-width: 500px), (max-height: 500px) {
   .board {
     border-width: 15px;
