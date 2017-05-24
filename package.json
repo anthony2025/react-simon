@@ -24,7 +24,6 @@
     "web-animations-js": "^2.2.5"
   },
   "devDependencies": {
-    "directory-named-webpack-plugin": "^2.1.0",
     "firebase-tools": "^3.6.1",
     "nwb": "^0.15.8",
     "snazzy": "^7.0.0",
