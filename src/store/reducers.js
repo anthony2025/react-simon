@@ -50,11 +50,7 @@ export default (state = initialState(), action) => {
         sequence: getRandomArray(COLORS, MAX_LEVEL),
         padsPlayed: [],
         currentLevel: 1,
-        observable: getNewObservable(
-          state.sequence,
-          state.currentLevel,
-          SEQUENCE_SPEED
-        )
+        observable: getNewObservable(state.sequence, 1, SEQUENCE_SPEED)
       }
     case INCREMENT_LEVEL:
       return {
