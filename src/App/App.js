@@ -1,7 +1,7 @@
 import React from 'react'
-import styles from './App.css';
+import styles from './App.css'
 
-import {REPOSITORY} from 'src/utils/constants'
+import {REPOSITORY} from 'src/store/constants'
 
 import GithubCorner from 'src/GithubCorner/GithubCorner'
 import Board from 'src/Board/Board'
@@ -12,8 +12,8 @@ export default function App () {
     <div className={styles.app}>
       <GithubCorner
         repository={REPOSITORY}
-        bgColor='white'
-        mainColor='#9F0F17'
+        bgColor="white"
+        mainColor="#9F0F17"
       />
       <Board />
       <Footer />

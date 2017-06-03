@@ -1,0 +1,5 @@
+export const ADD_PAD = 'ADD_PAD'
+export const TOGGLE_STRICT = 'TOGGLE_STRICT'
+export const REDO_LEVEL = 'REDO_LEVEL'
+export const RESET_GAME = 'RESET_GAME'
+export const INCREMENT_LEVEL = 'INCREMENT_LEVEL'

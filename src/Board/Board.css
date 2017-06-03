@@ -4,22 +4,22 @@
 
 .board {
   overflow: hidden;
-
   background-color: var(--gray);
   box-shadow: 0 0 5px var(--gray);
   border-color: var(--gray);
   border-style: solid;
-
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  grid-template-areas: "green red"
-                        "yellow blue";
+  grid-template-areas: "green red" "yellow blue";
 }
 
+
 /* DESKTOP */
-@media (min-width: 500px), (min-height: 500px) {
+
+@media (min-width: 500px),
+(min-height: 500px) {
   .board {
     border-width: 25px;
     grid-gap: 25px;
@@ -29,8 +29,11 @@
   }
 }
 
+
 /* MOBILE */
-@media (max-width: 500px), (max-height: 500px) {
+
+@media (max-width: 500px),
+(max-height: 500px) {
   .board {
     border-width: 15px;
     grid-gap: 15px;

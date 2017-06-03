@@ -1,7 +1,7 @@
 import React from 'react'
-import styles from './Board.css';
+import styles from './Board.css'
 
-import {COLORS} from 'src/utils/constants'
+import {COLORS} from 'src/store/constants'
 
 import Console from 'src/Console/Console'
 import Pad from 'src/Pad/Pad'
@@ -10,9 +10,7 @@ export default function Board () {
   return (
     <div className={styles.board}>
       <Console />
-      {COLORS.map((color) =>
-        <Pad color={color} key={color} />
-      )}
+      {COLORS.map(color => <Pad color={color} key={color} />)}
     </div>
   )
 }

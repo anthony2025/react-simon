@@ -11,7 +11,7 @@
 }
 
 .octoArm {
-  transform-origin: 130px 106px
+  transform-origin: 130px 106px;
 }
 
 .githubCorner:hover .octoArm {
@@ -19,13 +19,13 @@
 }
 
 @media (max-width: 500px) {
-    .githubCorner:hover .octoArm {
-        animation: none;
-    }
+  .githubCorner:hover .octoArm {
+    animation: none;
+  }
 
-    .githubCorner .octoArm {
-        animation: octocat-wave 560ms ease-in-out;
-    }
+  .githubCorner .octoArm {
+    animation: octocat-wave 560ms ease-in-out;
+  }
 }
 
 @keyframes octocat-wave {
@@ -42,7 +42,7 @@
   }
 
   60% {
-   transform: rotate(-25deg);
+    transform: rotate(-25deg);
   }
 
   80% {
@@ -53,4 +53,3 @@
     transform: rotate(0deg);
   }
 }
-

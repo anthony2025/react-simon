@@ -11,12 +11,10 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
   background-color: var(--white);
   border-color: var(--gray);
   border-style: solid;
   border-radius: 50%;
-
   display: flex;
   align-content: center;
   flex-wrap: wrap;
@@ -31,6 +29,7 @@
   letter-spacing: -.5vmin;
   font-weight: bolder;
 }
+
 .sup {
   font-size: 5vmin;
 }
@@ -56,6 +55,7 @@
   border-radius: 50%;
   background-color: var(--red);
 }
+
 .strictButton {
   border-radius: 50%;
   background-color: var(--yellow);
@@ -65,6 +65,7 @@
   transition: 0;
   filter: brightness(1.5);
 }
+
 .strictButtonOn {
   composes: strictButton;
   filter: brightness(1.5);
@@ -75,8 +76,11 @@
   font-family: Helvetica;
 }
 
+
 /* DESKTOP */
-@media (min-width: 500px), (min-height: 500px) {
+
+@media (min-width: 500px),
+(min-height: 500px) {
   .console {
     height: 45vmin;
     width: 45vmin;
@@ -87,17 +91,20 @@
   }
   .screen,
   .strictButton,
-  .resetButton  {
+  .resetButton {
     height: 8vmin;
     width: 8vmin;
   }
   .label {
-   font-size: 1.75vmin;
+    font-size: 1.75vmin;
   }
 }
 
+
 /* MOBILE */
-@media (max-width: 500px), (max-height: 500px) {
+
+@media (max-width: 500px),
+(max-height: 500px) {
   .console {
     height: 55vmin;
     width: 55vmin;
@@ -109,7 +116,7 @@
   }
   .screen,
   .strictButton,
-  .resetButton  {
+  .resetButton {
     height: 10vmin;
     width: 10vmin;
   }

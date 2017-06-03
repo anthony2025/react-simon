@@ -8,26 +8,23 @@
     "build": "nwb build-react-app",
     "clean": "nwb clean-app",
     "start": "nwb serve-react-app --reload",
-    "lint": "standard --verbose | snazzy",
-    "format": "standard --fix",
     "deploy": "yarn build && firebase deploy"
   },
   "dependencies": {
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "react-redux": "^5.0.4",
+    "react-redux": "^5.0.5",
     "redux": "^3.6.0",
     "redux-devtools-extension": "^2.13.2",
+    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
-    "rxjs": "^5.3.1",
+    "rxjs": "^5.4.0",
     "web-animations-js": "^2.2.5"
   },
   "devDependencies": {
-    "firebase-tools": "^3.6.1",
-    "nwb": "^0.15.8",
-    "snazzy": "^7.0.0",
-    "standard": "^10.0.2"
+    "firebase-tools": "^3.9.1",
+    "nwb": "^0.16.3"
   },
   "author": "Anthony Ascencio",
   "license": "CC0",
