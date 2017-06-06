@@ -6,7 +6,6 @@ export const isWrongAnswer = (state, color) =>
 export const hasLevelEnded = state =>
   state.padsPlayed.length + 1 >= state.currentLevel
 
-export const hasGameEnded = state =>
-  state.currentLevel >= MAX_LEVEL
-
+export const hasGameEnded = state => state.currentLevel >= MAX_LEVEL
 export const isStrictMode = state => state.strictMode
+export const getObservable = state => state.observable

@@ -3,16 +3,17 @@ import PropTypes from 'prop-types'
 import styles from './Pad.css'
 
 import {connect} from 'react-redux'
-import {handlePadClick, getObservable} from 'src/store/facade'
+import {playerPressedPad} from 'src/store/actionCreators'
+import {getObservable} from 'src/store/selectors'
 
 import {ANIMATION_DURATION} from 'src/store/constants'
 import lightenAnimation from 'src/utils/lightenAnimation'
 
 const mapStateToProps = state => ({
-  observable: state.observable
+  observable: getObservable(state)
 })
 const mapDispatchToProps = {
-  onPadClick: handlePadClick
+  onPadClick: playerPressedPad
 }
 
 class Pad extends Component {
