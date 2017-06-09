@@ -5,7 +5,7 @@ import {
   REDO_LEVEL,
   RESET_GAME,
   INCREMENT_LEVEL
-} from './actions'
+} from './actionTypes'
 import {
   isWrongAnswer,
   hasGameEnded,

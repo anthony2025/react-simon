@@ -6,10 +6,10 @@ import logger from 'redux-logger'
 
 import rootReducer from './reducers'
 
-export default createStore(
-  rootReducer,
-  composeWithDevTools(
-    applyMiddleware(thunk),
-    applyMiddleware(logger)
+const configureStore = () =>
+  createStore(
+    rootReducer,
+    composeWithDevTools(applyMiddleware(thunk), applyMiddleware(logger))
   )
-)
+
+export default configureStore

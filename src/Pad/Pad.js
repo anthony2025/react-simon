@@ -58,7 +58,7 @@ class Pad extends Component {
     return (
       <button
         className={styles[this.props.color]}
-        ref={pad => (this.pad = pad)}
+        ref={pad => this.pad = pad}
         onClick={this.handlePadClick}
       />
     )
