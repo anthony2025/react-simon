@@ -3,9 +3,9 @@ import styles from './App.css'
 
 import {REPOSITORY} from 'src/store/constants'
 
-import GithubCorner from 'src/GithubCorner/GithubCorner'
-import Board from 'src/Board/Board'
-import Footer from 'src/Footer/Footer'
+import GithubCorner from 'src/components/GithubCorner/GithubCorner'
+import Board from 'src/components/Board/Board'
+import Footer from 'src/components/Footer/Footer'
 
 export default function App () {
   return (

@@ -3,8 +3,8 @@ import styles from './Board.css'
 
 import {COLORS} from 'src/store/constants'
 
-import Console from 'src/Console/Console'
-import Pad from 'src/Pad/Pad'
+import Console from 'src/components/Console/Console'
+import Pad from 'src/components/Pad/Pad'
 
 export default function Board () {
   return (

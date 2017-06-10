@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 import {toggleStrict, resetGame} from 'src/store/actionCreators'
 import {isStrictMode} from 'src/store/selectors'
 
-import EightBitScreen from 'src/EightBitScreen/EightBitScreen'
+import EightBitScreen from 'src/components/EightBitScreen/EightBitScreen'
 
 Console.propTypes = {
   strictMode: PropTypes.bool.isRequired,
