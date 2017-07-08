@@ -1,4 +1,3 @@
-import {MAX_LEVEL} from './constants'
 import {
   ADD_PAD,
   TOGGLE_STRICT,

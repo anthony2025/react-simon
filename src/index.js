@@ -1,14 +1,23 @@
 import React from 'react'
 import {render} from 'react-dom'
-import './global.css'
+import registerServiceWorker from 'services/serviceWorker'
 
-import configureStore from 'src/store/configureStore'
+import injectResetCSS from 'styling/reset'
+import {ThemeProvider} from 'styled-components'
+import theme from 'styling/theme'
+
+import configureStore from 'store/configureStore'
 import {Provider} from 'react-redux'
-import App from 'src/components/App/App'
+import App from 'components/App/App'
 
 render(
   <Provider store={configureStore()}>
-    <App />
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
   </Provider>,
-  document.querySelector('#app')
+  document.getElementById('root')
 )
+
+injectResetCSS()
+registerServiceWorker()

@@ -1,7 +1,8 @@
-import getRandomArray from 'src/utils/getRandomArray'
-import getNewObservable from 'src/utils/getNewObservable'
+import getRandomArray from 'utils/getRandomArray'
+import getNewObservable from 'utils/getNewObservable'
 
-import {COLORS, MAX_LEVEL, SEQUENCE_SPEED} from './constants'
+import initialState from './initialState'
+import {PADS, MAX_LEVEL, SEQUENCE_SPEED} from './constants'
 import {
   ADD_PAD,
   TOGGLE_STRICT,
@@ -9,18 +10,6 @@ import {
   RESET_GAME,
   INCREMENT_LEVEL
 } from './actionTypes'
-
-const initialState = () => {
-  let sequence = getRandomArray(COLORS, MAX_LEVEL)
-  let observable = getNewObservable(sequence, 1, SEQUENCE_SPEED)
-  return {
-    sequence: sequence,
-    padsPlayed: [],
-    currentLevel: 1,
-    strictMode: false,
-    observable: observable
-  }
-}
 
 export default (state = initialState(), action) => {
   switch (action.type) {
@@ -47,7 +36,7 @@ export default (state = initialState(), action) => {
     case RESET_GAME:
       return {
         ...state,
-        sequence: getRandomArray(COLORS, MAX_LEVEL),
+        sequence: getRandomArray(PADS, MAX_LEVEL),
         padsPlayed: [],
         currentLevel: 1,
         observable: getNewObservable(state.sequence, 1, SEQUENCE_SPEED)

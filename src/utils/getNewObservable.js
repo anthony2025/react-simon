@@ -1,6 +1,5 @@
-import Rx from 'rxjs'
+import Rx from 'rxjs/Rx'
+// TODO treeshaking
 
-const getNewObservable = (source, take, speed) =>
+export default (source, take, speed) =>
   Rx.Observable.interval(speed).take(take).map(i => source[i])
-
-export default getNewObservable

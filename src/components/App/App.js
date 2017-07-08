@@ -1,22 +1,49 @@
 import React from 'react'
-import styles from './App.css'
+import styled from 'styled-components'
 
-import {REPOSITORY} from 'src/store/constants'
+import GithubCorner from 'components/GithubCorner'
+import Board from 'components/Board'
+import StateOverlay from 'components/StateOverlay'
+import Footer from 'components/Footer'
 
-import GithubCorner from 'src/components/GithubCorner/GithubCorner'
-import Board from 'src/components/Board/Board'
-import Footer from 'src/components/Footer/Footer'
-
-export default function App () {
+export default function App(props) {
   return (
-    <div className={styles.app}>
-      <GithubCorner
-        repository={REPOSITORY}
-        bgColor="white"
-        mainColor="#9F0F17"
-      />
-      <Board />
+    <Wrapper>
+      <GithubCorner />
+      <BoardContainer>
+        <StyledBoard />
+      </BoardContainer>
+      <StateContainer>
+        <StateOverlay />
+      </StateContainer>
       <Footer />
-    </div>
+    </Wrapper>
   )
 }
+
+const Wrapper = styled.div`display: flex;`
+
+const BoardContainer = styled.div`
+  flex-grow: 1;
+  height: 100vh;
+  background: ${props => props.theme.opposite};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const StateContainer = styled.div`
+  height: 100vh;
+  width: 45vw;
+  background: ${props => props.theme.primary};
+  box-shadow: -2px 0 5px rgba(0, 0, 0, .3);
+  margin-left: auto;
+  @media (max-width: 600px) {
+    display: none;
+  }
+`
+
+const StyledBoard = styled(Board)`
+  height: 90vh;
+  width: 90%;
+`

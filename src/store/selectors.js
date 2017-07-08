@@ -9,3 +9,4 @@ export const hasLevelEnded = state =>
 export const hasGameEnded = state => state.currentLevel >= MAX_LEVEL
 export const isStrictMode = state => state.strictMode
 export const getObservable = state => state.observable
+export const getGameTree = ({observable, ...gameTree}) => gameTree

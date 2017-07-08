@@ -5,26 +5,31 @@
   "homepage": "https://react-simon-game.firebaseapp.com/",
   "private": true,
   "scripts": {
-    "build": "nwb build-react-app",
-    "clean": "nwb clean-app",
-    "start": "nwb serve-react-app --reload",
-    "deploy": "yarn build && firebase deploy"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "deploy": "yarn build && firebase deploy",
+    "analyze": "yarn build && source-map-explorer build/static/js/main.*",
+    "format": "prettier --single-quote --no-bracket-spacing --no-semi --write 'src/**/*.js'"
   },
   "dependencies": {
     "prop-types": "^15.5.10",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
-    "redux": "^3.6.0",
+    "redux": "^3.7.1",
     "redux-devtools-extension": "^2.13.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
-    "rxjs": "^5.4.0",
+    "rxjs": "^5.4.2",
+    "styled-components": "^2.1.1",
     "web-animations-js": "^2.2.5"
   },
   "devDependencies": {
     "firebase-tools": "^3.9.1",
-    "nwb": "^0.16.3"
+    "prettier": "^1.5.2",
+    "react-scripts": "1.0.10",
+    "source-map-explorer": "^1.4.0"
   },
   "author": "Anthony Ascencio",
   "license": "CC0",

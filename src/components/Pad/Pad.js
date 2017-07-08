@@ -1,50 +1,44 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import styles from './Pad.css'
+import styled from 'styled-components'
 
-import {connect} from 'react-redux'
-import {playerPressedPad} from 'src/store/actionCreators'
-import {getObservable} from 'src/store/selectors'
+import {ANIMATION_DURATION} from 'store/constants'
+import lightenAnimation from 'styling/lightenAnimation'
 
-import {ANIMATION_DURATION} from 'src/store/constants'
-import lightenAnimation from 'src/utils/lightenAnimation'
-
-const mapStateToProps = state => ({
-  observable: getObservable(state)
-})
-const mapDispatchToProps = {
-  onPadClick: playerPressedPad
-}
-
-class Pad extends Component {
+export default class Pad extends Component {
   static propTypes = {
-    color: PropTypes.string.isRequired,
-    onPadClick: PropTypes.func.isRequired,
-    observable: PropTypes.object.isRequired
+    color: PropTypes.string,
+    sound: PropTypes.string,
+    onClick: PropTypes.func,
+    observable: PropTypes.object
   }
 
   constructor(props) {
     super(props)
-    this.audioObject = new Audio(`audio/sound-${this.props.color}.mp3`)
-    this.pad // reference to the DOM element
+    this.audioObject = new Audio(props.sound)
+    this.audioObject.preload = true // TODO, check this is working on mobile
+    this.isObservableActive = false
   }
 
   light = () => lightenAnimation(this.pad, ANIMATION_DURATION)
   sound = () => this.audioObject.play()
-  animate = () => {
-    this.light()
-    this.sound()
-  } // light + sound
 
   refreshObservable = () => {
-    this.props.observable.subscribe(color => {
-      if (color === this.props.color) this.light()
-    })
+    this.props.observable.subscribe(
+      color => {
+        this.isObservableActive = true
+        if (color === this.props.color) this.light()
+      },
+      error => console.log(error),
+      () => (this.isObservableActive = false)
+    )
   }
 
-  handlePadClick = () => {
-    this.animate()
-    this.props.onPadClick(this.props.color)
+  handleClick = () => {
+    if (this.isObservableActive) return
+    this.light()
+    this.sound()
+    this.props.onClick(this.props.color)
   }
 
   componentDidMount() {
@@ -56,13 +50,17 @@ class Pad extends Component {
 
   render() {
     return (
-      <button
-        className={styles[this.props.color]}
-        ref={pad => this.pad = pad}
-        onClick={this.handlePadClick}
+      <Button
+        color={this.props.color}
+        innerRef={pad => (this.pad = pad)}
+        onClick={this.handleClick}
       />
     )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Pad)
+const Button = styled.button`
+  background-color: ${props => props.theme[props.color]};
+  grid-area: ${props => props.color};
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .2);
+`

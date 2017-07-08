@@ -1,4 +1,4 @@
-A React version of the classic game from the 80's.
+A React version of the classic game from the 80's. This project is a playground for experimenting with web technologies.
 
 ## Live at
 [react-simon-game.firebaseapp.com](https://react-simon-game.firebaseapp.com)
