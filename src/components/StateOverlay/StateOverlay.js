@@ -20,4 +20,5 @@ const Wrapper = styled.div`
   color: ${props => props.theme.opposite};
   background-color: inherit;
   font-size: 2vmax;
+  line-height: 1.3;
 `

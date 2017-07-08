@@ -3,7 +3,8 @@ import {
   TOGGLE_STRICT,
   REDO_LEVEL,
   RESET_GAME,
-  INCREMENT_LEVEL
+  INCREMENT_LEVEL,
+  WIN_GAME
 } from './actionTypes'
 import {
   isWrongAnswer,
@@ -15,6 +16,7 @@ import {
 export const toggleStrict = () => ({type: TOGGLE_STRICT})
 export const redoLevel = () => ({type: REDO_LEVEL})
 export const resetGame = () => ({type: RESET_GAME})
+export const winGame = () => ({type: WIN_GAME})
 export const incrementLevel = () => ({type: INCREMENT_LEVEL})
 
 export const playerPressedPad = color => (dispatch, getState) => {
@@ -26,7 +28,7 @@ export const playerPressedPad = color => (dispatch, getState) => {
   }
   if (hasLevelEnded(getState())) {
     if (hasGameEnded(getState())) {
-      return dispatch(resetGame())
+      return dispatch(winGame())
     }
     return dispatch(incrementLevel())
   }

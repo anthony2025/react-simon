@@ -2,13 +2,21 @@ import getRandomArray from 'utils/getRandomArray'
 import getNewObservable from 'utils/getNewObservable'
 
 import initialState from './initialState'
-import {PADS, MAX_LEVEL, SEQUENCE_SPEED} from './constants'
+import {
+  PADS,
+  MAX_LEVEL,
+  SEQUENCE_SPEED,
+  WIN_SEQUENCE,
+  WIN_SPEED
+} from './constants'
+
 import {
   ADD_PAD,
   TOGGLE_STRICT,
   REDO_LEVEL,
   RESET_GAME,
-  INCREMENT_LEVEL
+  INCREMENT_LEVEL,
+  WIN_GAME
 } from './actionTypes'
 
 export default (state = initialState(), action) => {
@@ -40,6 +48,17 @@ export default (state = initialState(), action) => {
         padsPlayed: [],
         currentLevel: 1,
         observable: getNewObservable(state.sequence, 1, SEQUENCE_SPEED)
+      }
+    case WIN_GAME:
+      return {
+        ...state,
+        padsPlayed: 'YOU WON!!!',
+        currentLevel: 10,
+        observable: getNewObservable(
+          WIN_SEQUENCE,
+          WIN_SEQUENCE.length,
+          WIN_SPEED
+        )
       }
     case INCREMENT_LEVEL:
       return {
