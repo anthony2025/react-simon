@@ -19,6 +19,6 @@ export default function StateOverlay(props) {
 const Wrapper = styled.div`
   color: ${props => props.theme.opposite};
   background-color: inherit;
-  font-size: 2vmax;
+  font-size: 1.75vmax;
   line-height: 1.3;
 `

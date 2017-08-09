@@ -35,5 +35,5 @@ const Wrapper = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   grid-template-areas: "green red" "yellow blue";
-  animation: ${shake} 1s ease;
+  animation: ${shake} .8s ease;
 `

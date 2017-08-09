@@ -1,6 +1,8 @@
 import React from 'react'
 import {render} from 'react-dom'
+
 import registerServiceWorker from 'services/serviceWorker'
+import Raven from 'raven-js'
 
 import injectResetCSS from 'styling/reset'
 import {ThemeProvider} from 'styled-components'
@@ -21,3 +23,4 @@ render(
 
 injectResetCSS()
 registerServiceWorker()
+Raven.config(process.env.REACT_APP_RAVEN_URL).install()
