@@ -12,7 +12,7 @@ A React version of the classic game from the 80's. This project is a playground 
   * Webpack config powered by an [nwb] boilerplate
   * [Firebase] for easy single page hosting
 
-![Screenshot](/public/screenshot.png?raw=true)
+![Screenshot](/public/old_screenshot.png?raw=true)
 
 ## Future
   * Unit and snapshot testing
